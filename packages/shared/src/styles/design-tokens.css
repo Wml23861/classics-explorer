@@ -1,0 +1,10 @@
+:root {
+  --radius-card: 1rem;
+  --radius-lg: 1.25rem;
+
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  --shadow-card-hover: 0 1px 3px rgba(0,0,0,0.08), 0 8px 28px rgba(0,0,0,0.06);
+
+  --font-serif: 'Noto Serif SC', 'SimSun', 'STSong', serif;
+  --font-mono: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+}

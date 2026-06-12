@@ -1,0 +1,22 @@
+/* Diamond Sutra theme — warm gold/brown, aged scripture paper */
+[data-theme="diamond"] {
+  --color-primary: #b8860b;
+  --color-primary-light: #d4a017;
+  --color-accent-secondary: #3058c0;
+
+  --color-bg: #f7f3eb;
+  --color-surface: #fefcf7;
+  --color-text: #2c2416;
+  --color-text-secondary: #6b5d4a;
+  --color-text-muted: #b8a898;
+  --color-border: rgba(180, 150, 100, 0.2);
+
+  --color-tao: #2d6a4a;
+  --color-heart: #c04040;
+  --color-pure: #3a7a8a;
+  --color-yin: #6048a0;
+  --color-higher: #3058c0;
+  --color-wang: #8b4513;
+  --color-master: #006064;
+  --color-huineng: #4a148c;
+}

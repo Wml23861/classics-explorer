@@ -1,0 +1,168 @@
+/* Base reset & typography — shared across both sutras */
+@import "tailwindcss";
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  font-family: 'Noto Serif SC', 'SimSun', 'STSong', serif;
+}
+
+body {
+  line-height: 1.8;
+  color: var(--color-text);
+  background: var(--color-bg);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+a { color: inherit; text-decoration: none; }
+
+img, svg { display: block; max-width: 100%; }
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Utility */
+.content-width {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding-left: max(0.5rem, env(safe-area-inset-left));
+  padding-right: max(0.5rem, env(safe-area-inset-right));
+}
+@media (min-width: 768px) { .content-width { padding-left: 3rem; padding-right: 3rem; } }
+@media (min-width: 1024px) { .content-width { max-width: 60rem; padding-left: 5rem; padding-right: 5rem; } }
+@media (min-width: 1440px) { .content-width { max-width: 64rem; padding-left: 7rem; padding-right: 7rem; } }
+
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+}
+.card-hover {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.card-hover:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.section-paper {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 768px) { .section-paper { padding: 2rem; } }
+@media (min-width: 1024px) { .section-paper { padding: 2.5rem; } }
+
+.sutra-text {
+  font-family: 'Noto Serif SC', 'SimSun', serif;
+  line-height: 2.2;
+  letter-spacing: 0.06em;
+  text-align: justify;
+}
+
+.gold-line {
+  height: 1px;
+  border: none;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  opacity: 0.25;
+  margin: 2rem 0;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.fade-in-up { animation: fadeInUp 0.6s ease both; }
+.fade-in    { animation: fadeIn    0.5s ease both; }
+
+/* Reading progress bar */
+.reading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent-secondary, #3058c0));
+  z-index: 9999;
+  transition: width 0.15s linear;
+}
+
+/* Zen mode */
+.zen-mode .zen-hide { opacity: 0; pointer-events: none; transition: opacity 0.5s ease; }
+
+/* Print */
+@media print {
+  .zen-hide, .reading-bar, nav { display: none !important; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Bento grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 640px)  { .bento-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .bento-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1280px) { .bento-grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* Numbered items */
+.numbered-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.numbered-item:last-child { border-bottom: none; }
+.numbered-badge {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+/* Tag */
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: var(--color-primary);
+  color: #fff;
+  opacity: 0.8;
+  letter-spacing: 0.05em;
+}

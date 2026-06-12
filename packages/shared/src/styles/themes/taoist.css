@@ -1,0 +1,22 @@
+/* Taoist theme — cool jade green, mountain mist, ink wash */
+[data-theme="taoist"] {
+  --color-primary: #2d6a4a;
+  --color-primary-light: #4a8a6a;
+  --color-accent-secondary: #6b7b8d;
+
+  --color-bg: #f2f6f2;
+  --color-surface: #f8faf7;
+  --color-text: #1a221a;
+  --color-text-secondary: #4a5a4a;
+  --color-text-muted: #8a9a8a;
+  --color-border: rgba(45, 106, 74, 0.15);
+
+  --color-tao: #1a5a3a;
+  --color-heart: #8b4513;
+  --color-pure: #5a8a6a;
+  --color-yin: #4a6090;
+  --color-higher: #3a5a80;
+  --color-wang: #6b4a3a;
+  --color-master: #2a5a5a;
+  --color-huineng: #5a3a6a;
+}
