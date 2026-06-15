@@ -2,7 +2,7 @@
   "name": "classics-explorer",
   "private": true,
   "scripts": {
-    "dev:diamond": "pnpm -F @classics/diamond-sutra dev",
+    "dev": "pnpm -F @classics/diamond-sutra dev",
     "dev:tao": "pnpm -F @classics/tao-te-ching dev",
     "build:diamond": "pnpm -F @classics/diamond-sutra build",
     "build:tao": "pnpm -F @classics/tao-te-ching build",

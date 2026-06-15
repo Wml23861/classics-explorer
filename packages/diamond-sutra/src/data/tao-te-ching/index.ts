@@ -1,17 +1,101 @@
 import type { Chapter } from '../../types/chapter'
 import ch01 from './01'
+import ch02 from './02'
+import ch03 from './03'
+import ch04 from './04'
+import ch05 from './05'
+import ch06 from './06'
+import ch07 from './07'
 import ch08 from './08'
+import ch09 from './09'
+import ch10 from './10'
+import ch11 from './11'
+import ch12 from './12'
+import ch13 from './13'
+import ch14 from './14'
+import ch15 from './15'
+import ch16 from './16'
+import ch17 from './17'
+import ch18 from './18'
+import ch19 from './19'
+import ch20 from './20'
+import ch21 from './21'
+import ch22 from './22'
+import ch23 from './23'
+import ch24 from './24'
 import ch25 from './25'
+import ch26 from './26'
+import ch27 from './27'
+import ch28 from './28'
+import ch29 from './29'
+import ch30 from './30'
+import ch31 from './31'
+import ch32 from './32'
+import ch33 from './33'
+import ch34 from './34'
+import ch35 from './35'
+import ch36 from './36'
+import ch37 from './37'
+import ch38 from './38'
+import ch39 from './39'
+import ch40 from './40'
+import ch41 from './41'
+import ch42 from './42'
+import ch43 from './43'
+import ch44 from './44'
+import ch45 from './45'
+import ch46 from './46'
+import ch47 from './47'
+import ch48 from './48'
+import ch49 from './49'
+import ch50 from './50'
+import ch51 from './51'
+import ch52 from './52'
+import ch53 from './53'
+import ch54 from './54'
+import ch55 from './55'
+import ch56 from './56'
+import ch57 from './57'
+import ch58 from './58'
+import ch59 from './59'
+import ch60 from './60'
+import ch61 from './61'
+import ch62 from './62'
+import ch63 from './63'
+import ch64 from './64'
+import ch65 from './65'
+import ch66 from './66'
+import ch67 from './67'
+import ch68 from './68'
+import ch69 from './69'
+import ch70 from './70'
+import ch71 from './71'
+import ch72 from './72'
+import ch73 from './73'
+import ch74 from './74'
+import ch75 from './75'
+import ch76 from './76'
+import ch77 from './77'
+import ch78 from './78'
+import ch79 from './79'
+import ch80 from './80'
+import ch81 from './81'
 
 export const taoChapters: Chapter[] = [
-  ch01,
-  ch08,
-  ch25,
+  ch01, ch02, ch03, ch04, ch05, ch06, ch07, ch08, ch09, ch10,
+  ch11, ch12, ch13, ch14, ch15, ch16, ch17, ch18, ch19, ch20,
+  ch21, ch22, ch23, ch24, ch25, ch26, ch27, ch28, ch29, ch30,
+  ch31, ch32, ch33, ch34, ch35, ch36, ch37, ch38, ch39, ch40,
+  ch41, ch42, ch43, ch44, ch45, ch46, ch47, ch48, ch49, ch50,
+  ch51, ch52, ch53, ch54, ch55, ch56, ch57, ch58, ch59, ch60,
+  ch61, ch62, ch63, ch64, ch65, ch66, ch67, ch68, ch69, ch70,
+  ch71, ch72, ch73, ch74, ch75, ch76, ch77, ch78, ch79, ch80,
+  ch81,
 ]
 
 export function getTaoChapterById(id: number): Chapter | undefined {
   return taoChapters.find(c => c.id === id)
 }
 
-export const daoJingChapters = () => taoChapters.filter(c => c.id <= 37)
-export const deJingChapters = () => taoChapters.filter(c => c.id >= 38)
+export const daoJingChapters = (): Chapter[] => taoChapters.filter(c => c.id <= 37)
+export const deJingChapters = (): Chapter[] => taoChapters.filter(c => c.id >= 38)

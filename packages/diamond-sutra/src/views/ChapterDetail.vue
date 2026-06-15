@@ -211,8 +211,11 @@ const taoDimSources = [
         <div class="sutra-text space-y-4">
           <p v-for="(para, pi) in chapter.original.split('\n').filter(Boolean)" :key="pi" style="text-indent: 2em; margin-bottom: 1.25rem;">{{ para }}</p>
         </div>
-        <div class="mt-10 pt-8 border-t" style="border-color: rgba(180,150,100,0.15);">
+        <div v-if="isDiamond" class="mt-10 pt-8 border-t" style="border-color: rgba(180,150,100,0.15);">
           <p class="text-sm tracking-[0.15em]" style="color: #a09080;">姚秦 · 三藏法师鸠摩罗什 译</p>
+        </div>
+        <div v-else class="mt-10 pt-8 border-t" style="border-color: rgba(180,150,100,0.15);">
+          <p class="text-sm tracking-[0.15em]" style="color: #a09080;">春秋 · 老子 著</p>
         </div>
       </section>
       <div class="gold-line" />
@@ -270,7 +273,7 @@ const taoDimSources = [
         <div class="section-header">
           <div class="section-header-bar" style="background: #5a8a40;" />
           <h2 class="section-header-title" style="color: #5a8a40;">现 实 场 景</h2>
-          <span class="section-header-subtitle">当代生活中的般若智慧</span>
+          <span class="section-header-subtitle">{{ isDiamond ? '当代生活中的般若智慧' : '当代生活中的道家智慧' }}</span>
           <div class="section-header-line" style="background: linear-gradient(90deg, rgba(90,138,64,0.1), transparent);" />
         </div>
         <div class="space-y-4">
@@ -546,7 +549,7 @@ const taoDimSources = [
         <div class="section-header">
           <div class="section-header-bar" style="background: #b05050;" />
           <h2 class="section-header-title" style="color: #b05050;">修 行 感 悟</h2>
-          <span class="section-header-subtitle">历代大德行者证悟心得</span>
+          <span class="section-header-subtitle">{{ isDiamond ? '历代大德行者证悟心得' : '历代道门学者参悟心得' }}</span>
           <div class="section-header-line" style="background: linear-gradient(90deg, rgba(176,80,80,0.08), transparent);" />
         </div>
         <div class="sutra-text space-y-5">
