@@ -4,21 +4,26 @@ import { useRoute } from 'vue-router'
 import ChapterCard from '../components/ChapterCard.vue'
 import { chapters as diamondChapters } from '../data/index'
 import { taoChapters } from '../data/tao-te-ching/index'
+import { hexagrams } from '../data/yijing/index'
 
 const route = useRoute()
 const sutraType = computed(() => route.meta.sutra as string || 'diamond')
 const isDiamond = computed(() => sutraType.value === 'diamond')
+const isTaoist = computed(() => sutraType.value === 'taoist')
+const isYijing = computed(() => sutraType.value === 'yijing')
 
-const data = computed(() => isDiamond.value ? diamondChapters : taoChapters)
-const total = computed(() => isDiamond.value ? 32 : 81)
-const title = computed(() => isDiamond.value ? '金刚般若波罗蜜经' : '道德经')
-const subtitle = computed(() => isDiamond.value ? '逐品参究 · 融通六经 · 明心见性' : '逐章参究 · 道法自然 · 玄同有无')
-const headerTag = computed(() => isDiamond.value ? '融通万象 · 三十二品' : '道法自然 · 八十一章')
-const closingQuote = computed(() => isDiamond.value
+const data = computed(() => isYijing.value ? hexagrams : isDiamond.value ? diamondChapters : taoChapters)
+const total = computed(() => isYijing.value ? 64 : isDiamond.value ? 32 : 81)
+const title = computed(() => isYijing.value ? '周易' : isDiamond.value ? '金刚般若波罗蜜经' : '道德经')
+const subtitle = computed(() => isYijing.value ? '逐卦参究 · 爻位推移 · 观象玩辞' : isDiamond.value ? '逐品参究 · 融通六经 · 明心见性' : '逐章参究 · 道法自然 · 玄同有无')
+const headerTag = computed(() => isYijing.value ? '易道阴阳 · 六十有四' : isDiamond.value ? '融通万象 · 三十二品' : '道法自然 · 八十一章')
+const closingQuote = computed(() => isYijing.value
+  ? '"一阴一阳之谓道。<br/>继之者善也，成之者性也。"'
+  : isDiamond.value
   ? '"凡所有相，皆是虚妄。<br/>若见诸相非相，即见如来。"'
   : '"上善若水。水善利万物而不争，<br/>处众人之所恶，故几于道。"')
-const closingAttribution = computed(() => isDiamond.value ? '— 第五品 · 如理实见分' : '— 第八章 · 上善若水')
-const linkPrefix = computed(() => isDiamond.value ? '/diamond' : '/tao')
+const closingAttribution = computed(() => isYijing.value ? '— 《系辞上传》第五章' : isDiamond.value ? '— 第五品 · 如理实见分' : '— 第八章 · 上善若水')
+const linkPrefix = computed(() => isYijing.value ? '/yijing' : isDiamond.value ? '/diamond' : '/tao')
 
 // Group into rows of 4
 const grouped = computed(() => {

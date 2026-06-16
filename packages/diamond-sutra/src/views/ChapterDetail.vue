@@ -3,14 +3,17 @@ import { computed, ref, onMounted, onUnmounted, nextTick } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { chapters as diamondChapters } from '../data/index'
 import { taoChapters } from '../data/tao-te-ching/index'
+import { hexagrams } from '../data/yijing/index'
 
 const route = useRoute()
 const router = useRouter()
 
 const sutraType = computed(() => (route.meta.sutra as string) || 'diamond')
 const isDiamond = computed(() => sutraType.value === 'diamond')
-const chapterList = computed(() => isDiamond.value ? diamondChapters : taoChapters)
-const linkPrefix = computed(() => isDiamond.value ? '/diamond' : '/tao')
+const isTaoist = computed(() => sutraType.value === 'taoist')
+const isYijing = computed(() => sutraType.value === 'yijing')
+const chapterList = computed(() => isYijing.value ? hexagrams : isDiamond.value ? diamondChapters : taoChapters)
+const linkPrefix = computed(() => isYijing.value ? '/yijing' : isDiamond.value ? '/diamond' : '/tao')
 
 const chapterId = computed(() => parseInt(route.params.id as string))
 const chapter = computed(() => chapterList.value.find(c => c.id === chapterId.value))

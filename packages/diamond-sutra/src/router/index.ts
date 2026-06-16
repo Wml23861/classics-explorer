@@ -10,6 +10,8 @@ const routes: RouteRecordRaw[] = [
   { path: '/diamond/:id',   name: 'DiamondDetail', component: ChapterDetail,  meta: { title: '', sutra: 'diamond' } },
   { path: '/tao',           name: 'TaoList',       component: Chapters,      meta: { title: '道德经 · 八十一章', sutra: 'taoist' } },
   { path: '/tao/:id',       name: 'TaoDetail',     component: ChapterDetail,  meta: { title: '', sutra: 'taoist' } },
+  { path: '/yijing',       name: 'YijingList',    component: Chapters,      meta: { title: '易经 · 六十四卦', sutra: 'yijing' } },
+  { path: '/yijing/:id',   name: 'YijingDetail',  component: ChapterDetail,  meta: { title: '', sutra: 'yijing' } },
 ]
 
 const router = createRouter({

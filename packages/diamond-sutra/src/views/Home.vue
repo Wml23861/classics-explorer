@@ -187,6 +187,9 @@ const stats = [
           <button @click="router.push('/tao')" class="btn-ghost" style="border-color: rgba(45,106,74,0.3); color: #2d6a4a;">
             道德经 · 八十一章
           </button>
+          <button @click="router.push('/yijing')" class="btn-ghost" style="border-color: rgba(139,69,19,0.3); color: #8b4513;">
+            易经 · 六十四卦
+          </button>
         </div>
 
         <!-- Scroll hint -->
