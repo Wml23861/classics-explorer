@@ -6,11 +6,12 @@ import h13 from './13'; import h14 from './14'; import h15 from './15'; import h
 import h17 from './17'; import h18 from './18'; import h19 from './19'; import h20 from './20'
 import h21 from './21'; import h22 from './22'; import h23 from './23'; import h24 from './24'
 import h26 from './26'; import h27 from './27'; import h28 from './28'
+import h29 from './29'; import h30 from './30'
 
 export const hexagrams: Hexagram[] = [
   h01, h02, h03, h04, h05, h06, h07, h08, h09, h10,
   h11, h12, h13, h14, h15, h16, h17, h18, h19, h20,
-  h21, h22, h23, h24, h26, h27, h28,
+  h21, h22, h23, h24, h26, h27, h28, h29, h30,
 ]
 
 export function getHexagramById(id: number): Hexagram | undefined {
