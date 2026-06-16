@@ -35,10 +35,16 @@ function spy() { for (const id of [...ids].reverse()) { const el = document.getE
 onMounted(() => window.addEventListener('scroll', spy, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', spy))
 
+const originalText = computed(() => {
+  if (!chapter.value) return ''
+  const c = chapter.value as any
+  return c.original || c.hexagramOriginal || ''
+})
+
 const time = computed(() => {
   if (!chapter.value) return ''
-  const c = chapter.value
-  const t = [c.original, c.essence, c.insights, c.modernPractice,
+  const c = chapter.value as any
+  const t = [originalText.value, c.essence, c.insights, c.modernPractice,
     ...c.scenarios.map(s => s.title + s.desc),
     c.ruShiDao.confucian, c.ruShiDao.buddhist, c.ruShiDao.taoist,
     c.wangYangming ?? '', c.huineng ?? '', c.modernMasters ?? '',
@@ -57,6 +63,18 @@ const time = computed(() => {
       c.fiveMirrors?.mirror ?? '', c.fiveMirrors?.realm ?? '',
       c.fourFoldAnalysis?.yiJing ?? '', c.fourFoldAnalysis?.zhuangZi ?? '',
       c.fourFoldAnalysis?.maoZeDong ?? '', c.fourFoldAnalysis?.chanZong ?? '',
+    )
+  } else if (isYijing.value) {
+    t.push(
+      c.lineAnalysis?.map((l: any) => l.original + l.analysis).join('') ?? '',
+      c.tuanZhuan ?? '', c.daXiangZhuan ?? '', c.xiaoXiangZhuan ?? '',
+      c.fiveViews?.change ?? '', c.fiveViews?.timing ?? '', c.fiveViews?.position ?? '',
+      c.fiveViews?.centrality ?? '', c.fiveViews?.connectivity ?? '',
+      c.sixFold?.confucianWings ?? '', c.sixFold?.taoistLaozhuang ?? '', c.sixFold?.buddhistPrajna ?? '',
+      c.sixFold?.medicineViscera ?? '', c.sixFold?.systemsScience ?? '', c.sixFold?.westernPhilosophy ?? '',
+      c.classicsBridge?.diamondSutra ?? '', c.classicsBridge?.taoTeChing ?? '',
+      c.classicsBridge?.analects ?? '', c.classicsBridge?.artOfWar ?? '',
+      c.higherDimension?.cosmology ?? '', c.higherDimension?.mathematics ?? '', c.higherDimension?.synchronicity ?? '',
     )
   } else {
     t.push(
@@ -173,7 +191,7 @@ const taoDimSources = [
       <div class="flex items-center justify-center gap-5 mt-6">
         <span class="text-sm tracking-wider" style="color: #a09080;">{{ time }}</span>
         <span style="color: #c8b898;">·</span>
-        <span class="text-sm tracking-wider" style="color: #a09080;">{{ chapter.original.length }} 字原文</span>
+        <span class="text-sm tracking-wider" style="color: #a09080;">{{ originalText.length }} 字{{ isYijing ? '卦爻辞' : '原文' }}</span>
       </div>
       <div class="gold-line-heavy w-36 mx-auto mt-10" />
     </section>
@@ -209,10 +227,10 @@ const taoDimSources = [
           <div class="section-header-bar" style="background: #8b6914;" />
           <h2 class="section-header-title" style="color: #8b6914;">原 文</h2>
           <div class="section-header-line" style="background: linear-gradient(90deg, rgba(180,130,30,0.15), transparent);" />
-          <button @click="copy(chapter.original, 'original')" class="text-sm cursor-pointer bg-transparent border-none transition-colors ml-auto" :style="{ color: copied === 'original' ? '#5a8a40' : '#b8a080' }" title="复制">{{ copied === 'original' ? '✓ 已复制' : '复制' }}</button>
+          <button @click="copy(originalText, 'original')" class="text-sm cursor-pointer bg-transparent border-none transition-colors ml-auto" :style="{ color: copied === 'original' ? '#5a8a40' : '#b8a080' }" title="复制">{{ copied === 'original' ? '✓ 已复制' : '复制' }}</button>
         </div>
         <div class="sutra-text space-y-4">
-          <p v-for="(para, pi) in chapter.original.split('\n').filter(Boolean)" :key="pi" style="text-indent: 2em; margin-bottom: 1.25rem;">{{ para }}</p>
+          <p v-for="(para, pi) in originalText.split('\n').filter(Boolean)" :key="pi" style="text-indent: 2em; margin-bottom: 1.25rem;">{{ para }}</p>
         </div>
         <div v-if="isDiamond" class="mt-10 pt-8 border-t" style="border-color: rgba(180,150,100,0.15);">
           <p class="text-sm tracking-[0.15em]" style="color: #a09080;">姚秦 · 三藏法师鸠摩罗什 译</p>
