@@ -30,7 +30,7 @@ onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 const sect = ref('')
-const ids = ['original', 'essence', 'fiveMirrors', 'scenarios', 'rushidao', 'fourFold', 'celebrity', 'classics', 'higher', 'heartBarrier', 'wangYangming', 'huineng', 'modernMasters', 'relationships', 'insights', 'modern', 'meditation', 'energy', 'questions', 'creator']
+const ids = ['original', 'essence', 'overview', 'fiveMirrors', 'scenarios', 'rushidao', 'fourFold', 'celebrity', 'classics', 'higher', 'heartBarrier', 'wangYangming', 'huineng', 'modernMasters', 'relationships', 'insights', 'modern', 'meditation', 'energy', 'questions', 'creator']
 function spy() { for (const id of [...ids].reverse()) { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top <= 160) { sect.value = id; break } } }
 onMounted(() => window.addEventListener('scroll', spy, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', spy))
@@ -109,13 +109,13 @@ const copied = ref<string | null>(null)
 function copy(t: string, id: string) { navigator.clipboard.writeText(t); copied.value = id; setTimeout(() => copied.value = null, 2000) }
 
 const sectionLabels: Record<string, string> = {
-  original: '原文', essence: '要义', fiveMirrors: '五镜', scenarios: '场景', rushidao: '汇通',
+  original: '原文', essence: '要义', overview: '卦象', fiveMirrors: '五镜', scenarios: '场景', rushidao: '汇通',
   fourFold: '四维', celebrity: '名人', classics: '融通', higher: '高维', heartBarrier: '情关', wangYangming: '心学', huineng: '六祖',
   modernMasters: '法师', relationships: '人伦', insights: '感悟', modern: '现代',
   meditation: '冥想', energy: '能量', questions: '问答', creator: '创作者',
 }
 const sectionChars: Record<string, string> = {
-  original: '原', essence: '义', fiveMirrors: '镜', scenarios: '境', rushidao: '通',
+  original: '原', essence: '义', overview: '象', fiveMirrors: '镜', scenarios: '境', rushidao: '通',
   fourFold: '四', celebrity: '名', classics: '融', higher: '维', heartBarrier: '情', wangYangming: '王', huineng: '慧',
   modernMasters: '师', relationships: '伦', insights: '悟', modern: '行',
   meditation: '静', energy: '能', questions: '问', creator: '明',
@@ -203,20 +203,20 @@ const taoDimSources = [
           class="flex items-center gap-2 px-4 py-2 text-base tracking-wider cursor-pointer rounded-full transition-all duration-300 border-0"
           style="background: #fefcf7; color: #6b5d4a; border: 1px solid rgba(180,150,100,0.2);">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-          {{ isDiamond ? '上一品' : '上一章' }}
+          {{ isYijing ? '上一卦' : isDiamond ? '上一品' : '上一章' }}
         </button>
         <div v-else />
-        <router-link :to="isDiamond ? '/diamond' : '/tao'" class="text-sm tracking-[0.2em] no-underline" style="color: #a09080;">返回目录</router-link>
+        <router-link :to="isYijing ? '/yijing' : isDiamond ? '/diamond' : '/tao'" class="text-sm tracking-[0.2em] no-underline" style="color: #a09080;">返回目录</router-link>
         <button v-if="next" @click="go(next.id)"
           class="flex items-center gap-2 px-4 py-2 text-base tracking-wider cursor-pointer rounded-full transition-all duration-300 border-0"
           style="background: #fefcf7; color: #6b5d4a; border: 1px solid rgba(180,150,100,0.2);">
-          {{ isDiamond ? '下一品' : '下一章' }}
+          {{ isYijing ? '下一卦' : isDiamond ? '下一品' : '下一章' }}
           <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
         </button>
       </div>
     </div>
 
-    <div v-if="zen" class="text-center text-sm tracking-wider py-3" style="color: #c8b898;">← {{ isDiamond ? '上一品' : '上一章' }} | → {{ isDiamond ? '下一品' : '下一章' }} | Z 退出禅读</div>
+    <div v-if="zen" class="text-center text-sm tracking-wider py-3" style="color: #c8b898;">← {{ isYijing ? '上一卦' : isDiamond ? '上一品' : '上一章' }} | → {{ isYijing ? '下一卦' : isDiamond ? '下一品' : '下一章' }} | Z 退出禅读</div>
 
     <!-- CONTENT BODY -->
     <div class="pb-32 sm:pb-40 content-width space-y-14 sm:space-y-20" :class="fClass">
@@ -253,6 +253,65 @@ const taoDimSources = [
         </div>
       </section>
       <div class="gold-line" />
+
+      <!-- 2.5 卦象总览 — 易经专属 -->
+      <section v-if="isYijing && chapter.overview" id="overview" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(139,105,20,0.02) 50%, rgba(48,88,192,0.02) 100%);">
+        <div class="section-header">
+          <div class="section-header-bar" style="background: linear-gradient(180deg, #2d6a4a, #8b6914, #c04040);" />
+          <h2 class="section-header-title" style="color: #5a4020;">卦 象 总 览</h2>
+          <span class="section-header-subtitle">上下卦 · 五行 · 宫位 · 世应 · 综错互</span>
+          <div class="section-header-line" style="background: linear-gradient(90deg, rgba(90,64,32,0.1), transparent);" />
+        </div>
+        <!-- 卦形图 -->
+        <div class="flex justify-center mb-6">
+          <img :src="chapter.symbol" :alt="chapter.title" style="max-width:200px;" class="rounded-lg" />
+        </div>
+        <!-- 卦象信息网格 -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">上卦</div><div style="font-size:1.1rem;font-weight:700;color:#5a4020;">{{ chapter.overview.upperTrigram }}</div></div>
+          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">下卦</div><div style="font-size:1.1rem;font-weight:700;color:#5a4020;">{{ chapter.overview.lowerTrigram }}</div></div>
+          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">五行</div><div style="font-size:1.1rem;font-weight:700;color:#5a4020;">{{ chapter.overview.fiveElement }}</div></div>
+          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">卦德</div><div style="font-size:1.1rem;font-weight:700;color:#5a4020;">{{ chapter.overview.hexagramVirtue }}</div></div>
+          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">宫位</div><div style="font-size:1rem;font-weight:700;color:#5a4020;">{{ chapter.overview.palace }}</div></div>
+          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">世爻</div><div style="font-size:1.1rem;font-weight:700;color:#5a4020;">{{ chapter.overview.generationLayer }}</div></div>
+          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">应爻</div><div style="font-size:1.1rem;font-weight:700;color:#5a4020;">{{ chapter.overview.responseLayer }}</div></div>
+          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">干支</div><div style="font-size:0.9rem;font-weight:700;color:#5a4020;">{{ chapter.overview.tianGan }}{{ chapter.overview.diZhi }}</div></div>
+        </div>
+        <!-- 综卦/错卦/互卦 -->
+        <div v-if="chapter.relations" class="grid grid-cols-3 gap-3">
+          <div v-if="chapter.relations.inverseHexagram" class="card" style="padding:1rem; text-align:center; cursor:pointer;" @click="go(chapter.relations.inverseHexagram.id)">
+            <div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">综卦（颠倒）</div>
+            <div style="font-size:1rem;font-weight:700;color:#2d6a4a;">{{ chapter.relations.inverseHexagram.name }}</div>
+          </div>
+          <div v-if="chapter.relations.reverseHexagram" class="card" style="padding:1rem; text-align:center; cursor:pointer;" @click="go(chapter.relations.reverseHexagram.id)">
+            <div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">错卦（旁通）</div>
+            <div style="font-size:1rem;font-weight:700;color:#8b6914;">{{ chapter.relations.reverseHexagram.name }}</div>
+          </div>
+          <div v-if="chapter.relations.mutualHexagram" class="card" style="padding:1rem; text-align:center; cursor:pointer;" @click="go(chapter.relations.mutualHexagram.id)">
+            <div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">互卦</div>
+            <div style="font-size:1rem;font-weight:700;color:#c04040;">{{ chapter.relations.mutualHexagram.name }}</div>
+          </div>
+        </div>
+      </section>
+      <div v-if="isYijing && chapter.overview" class="gold-line" />
+
+      <!-- 2.6 易门五观 — 易经专属 -->
+      <section v-if="isYijing && chapter.fiveViews" id="fiveMirrors" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(45,106,74,0.02) 50%, rgba(48,88,192,0.02) 100%);">
+        <div class="section-header">
+          <div class="section-header-bar" style="background: linear-gradient(180deg, #2d6a4a, #3a7a8a, #8b6914, #c04040, #6048a0);" />
+          <h2 class="section-header-title" style="color: #2d6a4a;">易 门 五 观</h2>
+          <span class="section-header-subtitle">变 · 时 · 位 · 中 · 通 — 五重易道参究</span>
+          <div class="section-header-line" style="background: linear-gradient(90deg, rgba(45,106,74,0.15), transparent);" />
+        </div>
+        <div class="space-y-5">
+          <div class="five-mirror-card" style="border-left: 4px solid #2d6a4a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(45,106,74,0.1); color: #2d6a4a;">变</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #2d6a4a;">阴阳爻变</h3></div><p style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20; padding-left: 0.25rem;">{{ chapter.fiveViews.change }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #3a7a8a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(58,122,138,0.1); color: #3a7a8a;">时</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #3a7a8a;">卦时消息</h3></div><p style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20; padding-left: 0.25rem;">{{ chapter.fiveViews.timing }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #8b6914;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(139,105,20,0.1); color: #8b6914;">位</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #8b6914;">六位中正</h3></div><p style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20; padding-left: 0.25rem;">{{ chapter.fiveViews.position }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #c04040;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(192,64,64,0.1); color: #c04040;">中</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #c04040;">守中用中</h3></div><p style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20; padding-left: 0.25rem;">{{ chapter.fiveViews.centrality }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #6048a0;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(96,72,160,0.1); color: #6048a0;">通</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #6048a0;">旁通感应</h3></div><p style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20; padding-left: 0.25rem;">{{ chapter.fiveViews.connectivity }}</p></div>
+        </div>
+      </section>
+      <div v-if="isYijing && chapter.fiveViews" class="gold-line" />
 
       <!-- 3. 五镜分析 — 金刚经: 静净敬镜境 -->
       <section v-if="isDiamond && chapter.fiveMirrors" id="fiveMirrors" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(139,105,20,0.02) 50%, rgba(48,88,192,0.02) 100%);">
@@ -779,13 +838,13 @@ const taoDimSources = [
       <div class="flex items-center justify-between">
         <button v-if="prev" @click="go(prev.id)"
           class="group flex flex-col items-start gap-1.5 px-4 py-3 text-left rounded-xl transition-all duration-300 cursor-pointer bg-transparent border-none">
-          <span class="text-sm tracking-wider" style="color: #a09080;">← {{ isDiamond ? '上一品' : '上一章' }}</span>
+          <span class="text-sm tracking-wider" style="color: #a09080;">← {{ isYijing ? '上一卦' : isDiamond ? '上一品' : '上一章' }}</span>
           <span class="text-base tracking-wider transition-colors" style="color: #6b5d4a;">{{ prev.title }}</span>
         </button>
-        <router-link :to="isDiamond ? '/diamond' : '/tao'" class="text-sm tracking-[0.2em] no-underline" style="color: #a09080;">返回目录</router-link>
+        <router-link :to="isYijing ? '/yijing' : isDiamond ? '/diamond' : '/tao'" class="text-sm tracking-[0.2em] no-underline" style="color: #a09080;">返回目录</router-link>
         <button v-if="next" @click="go(next.id)"
           class="group flex flex-col items-end gap-1.5 px-4 py-3 text-right rounded-xl transition-all duration-300 cursor-pointer bg-transparent border-none">
-          <span class="text-sm tracking-wider" style="color: #a09080;">{{ isDiamond ? '下一品' : '下一章' }} →</span>
+          <span class="text-sm tracking-wider" style="color: #a09080;">{{ isYijing ? '下一卦' : isDiamond ? '下一品' : '下一章' }} →</span>
           <span class="text-base tracking-wider transition-colors" style="color: #6b5d4a;">{{ next.title }}</span>
         </button>
       </div>
