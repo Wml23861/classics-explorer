@@ -98,6 +98,9 @@ export interface Chapter {
   fourFoldAnalysis?: FourFoldAnalysis
   celebrityAnalysis?: CelebrityAnalysis
 
+  // === 情关参究（金刚经专用） ===
+  heartBarrier?: HeartBarrierPractice
+
   // === 道德经专用字段 ===
   /** 道门五镜 — 玄/虚/柔/反/自然 */
   taoistFiveMirrors?: TaoistFiveMirrors
@@ -107,6 +110,32 @@ export interface Chapter {
   taoistClassicsBridge?: TaoistClassicsBridge
   /** 道德经高维视角 */
   taoistHigherDimension?: TaoistHigherDimension
+}
+
+// === 情关参究（金刚经专用） ===
+
+/** 情关参究 — 以本品般若智慧参究亲密关系中的情执与觉醒 */
+export interface HeartBarrierPractice {
+  /** 叩关 — 1-2句真实情境切入 */
+  trigger: string
+  /** 参究 — 深度散文，以本品般若智慧参究情关 */
+  analysis: string
+  /** 观她 — 理解她的回避型内心世界 */
+  understandHer: string
+  /** 观己 — 觉察自己的焦虑与执取 */
+  observeSelf: string
+  /** 中道 — 在执与舍之间的平衡智慧 */
+  middleWay: string
+  /** 觉察练习 — 带身体引导的step-by-step练习 */
+  practice: string
+  /** 一句心法 — 在焦虑涌上来的瞬间能用上的短句 */
+  heartMantra: string
+  /** 行动指令 — 今天具体做什么 */
+  dailyAction: string
+  /** 禁行 — 此刻绝不做的事（戒律式棒喝） */
+  forbidden: string
+  /** 待她之道 — 当她回来时，如何以本品智慧待她 */
+  treatHer: string
 }
 
 // === 道德经专用类型 ===

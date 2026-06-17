@@ -20,6 +20,7 @@ import h52 from './52'
 import h53 from './53'
 import h54 from './54'
 import h56 from './56'
+import h55 from './55'
 import h59 from './59'; import h57 from './57'; import h58 from './58'
 import h05 from './05'
 import h06 from './06'
@@ -55,7 +56,7 @@ export const hexagrams: Hexagram[] = [
   h11, h12, h13, h14, h15, h16, h17, h18, h19,
   h20, h21, h22, h23, h24, h25, h26, h27, h28, h29,
   h30, h31, h32, h33, h34, h35, h36, h37, h38, h39,
-  h40, h41, h42, h43, h44, h45, h46, h47, h48, h49, h50, h52, h53, h54, h56, h57, h58, h59,
+  h40, h41, h42, h43, h44, h45, h46, h47, h48, h49, h50, h51, h52, h53, h54, h55, h56, h57, h58, h59,
   h61, h62, h64,
 ]
 

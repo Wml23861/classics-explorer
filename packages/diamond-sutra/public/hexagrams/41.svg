@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280" width="200" height="280">
+  <rect width="200" height="280" fill="#fefcf7" rx="8"/>
+  <!-- Hexagram name -->
+  <text x="100" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#5a4020" font-family="serif">山泽损</text>
+  <!-- Yao lines -->
+  <rect x="30" y="40" width="140" height="8" rx="3" fill="#c0392b"/>
+  <text x="182" y="49" font-size="11" fill="#888" font-family="sans-serif">上九</text>
+  <rect x="30" y="76" width="55" height="8" rx="3" fill="#2c3e50"/>
+  <rect x="115" y="76" width="55" height="8" rx="3" fill="#2c3e50"/>
+  <text x="182" y="85" font-size="11" fill="#888" font-family="sans-serif">五六</text>
+  <rect x="30" y="112" width="55" height="8" rx="3" fill="#2c3e50"/>
+  <rect x="115" y="112" width="55" height="8" rx="3" fill="#2c3e50"/>
+  <text x="182" y="121" font-size="11" fill="#888" font-family="sans-serif">四六</text>
+  <rect x="30" y="148" width="55" height="8" rx="3" fill="#2c3e50"/>
+  <rect x="115" y="148" width="55" height="8" rx="3" fill="#2c3e50"/>
+  <text x="182" y="157" font-size="11" fill="#888" font-family="sans-serif">三六</text>
+  <rect x="30" y="184" width="140" height="8" rx="3" fill="#c0392b"/>
+  <text x="182" y="193" font-size="11" fill="#888" font-family="sans-serif">二九</text>
+  <rect x="30" y="220" width="140" height="8" rx="3" fill="#c0392b"/>
+  <text x="182" y="229" font-size="11" fill="#888" font-family="sans-serif">初九</text>
+
+  <!-- Hexagram number -->
+  <text x="100" y="272" text-anchor="middle" font-size="10" fill="#b8a080" font-family="serif">第41卦</text>
+</svg>
