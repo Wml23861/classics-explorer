@@ -30,7 +30,7 @@ onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 const sect = ref('')
-const ids = ['original', 'essence', 'fiveMirrors', 'scenarios', 'rushidao', 'fourFold', 'celebrity', 'classics', 'higher', 'wangYangming', 'huineng', 'modernMasters', 'relationships', 'insights', 'modern', 'meditation', 'energy', 'questions', 'creator']
+const ids = ['original', 'essence', 'fiveMirrors', 'scenarios', 'rushidao', 'fourFold', 'celebrity', 'classics', 'higher', 'heartBarrier', 'wangYangming', 'huineng', 'modernMasters', 'relationships', 'insights', 'modern', 'meditation', 'energy', 'questions', 'creator']
 function spy() { for (const id of [...ids].reverse()) { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top <= 160) { sect.value = id; break } } }
 onMounted(() => window.addEventListener('scroll', spy, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', spy))
@@ -110,13 +110,13 @@ function copy(t: string, id: string) { navigator.clipboard.writeText(t); copied.
 
 const sectionLabels: Record<string, string> = {
   original: '原文', essence: '要义', fiveMirrors: '五镜', scenarios: '场景', rushidao: '汇通',
-  fourFold: '四维', celebrity: '名人', classics: '融通', higher: '高维', wangYangming: '心学', huineng: '六祖',
+  fourFold: '四维', celebrity: '名人', classics: '融通', higher: '高维', heartBarrier: '情关', wangYangming: '心学', huineng: '六祖',
   modernMasters: '法师', relationships: '人伦', insights: '感悟', modern: '现代',
   meditation: '冥想', energy: '能量', questions: '问答', creator: '创作者',
 }
 const sectionChars: Record<string, string> = {
   original: '原', essence: '义', fiveMirrors: '镜', scenarios: '境', rushidao: '通',
-  fourFold: '四', celebrity: '名', classics: '融', higher: '维', wangYangming: '王', huineng: '慧',
+  fourFold: '四', celebrity: '名', classics: '融', higher: '维', heartBarrier: '情', wangYangming: '王', huineng: '慧',
   modernMasters: '师', relationships: '伦', insights: '悟', modern: '行',
   meditation: '静', energy: '能', questions: '问', creator: '明',
 }
@@ -511,6 +511,99 @@ const taoDimSources = [
         </div>
       </section>
       <div v-if="chapter.modernMasters" class="gold-line" />
+
+      <!-- 9.5 情关参究 — 以本品般若智慧参究亲密关系中的情执与觉醒 -->
+      <section v-if="chapter.heartBarrier" id="heartBarrier" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(192,64,64,0.02) 50%, rgba(184,134,11,0.02) 100%);">
+        <div class="section-header">
+          <div class="section-header-bar" style="background: linear-gradient(180deg, #c04040, #b8860b, #8b4513, #c04040);" />
+          <h2 class="section-header-title" style="color: #c04040;">情 关 参 究</h2>
+          <span class="section-header-subtitle">叩关 · 参究 · 观她 · 观己 · 中道 · 实修</span>
+          <div class="section-header-line" style="background: linear-gradient(90deg, rgba(192,64,64,0.12), transparent);" />
+        </div>
+
+        <!-- 叩关 -->
+        <div class="five-mirror-card" style="border-left: 4px solid #c04040;">
+          <div class="five-mirror-header">
+            <div class="five-mirror-icon" style="background: rgba(192,64,64,0.1); color: #c04040;">叩</div>
+            <h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #c04040;">叩 关</h3>
+          </div>
+          <p style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20; padding-left: 0.25rem; font-style: italic;">{{ chapter.heartBarrier.trigger }}</p>
+        </div>
+
+        <!-- 参究 -->
+        <div class="five-mirror-card" style="border-left: 4px solid #b8860b;">
+          <div class="five-mirror-header">
+            <div class="five-mirror-icon" style="background: rgba(184,134,11,0.1); color: #b8860b;">参</div>
+            <h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #8b6914;">参 究</h3>
+          </div>
+          <div class="sutra-text space-y-3" style="padding-left: 0.25rem;">
+            <p v-for="(para, pi) in chapter.heartBarrier.analysis.split('\n').filter(Boolean)" :key="pi" style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20;">{{ para }}</p>
+          </div>
+        </div>
+
+        <!-- 观她 -->
+        <div class="five-mirror-card" style="border-left: 4px solid #3a7a8a;">
+          <div class="five-mirror-header">
+            <div class="five-mirror-icon" style="background: rgba(58,122,138,0.1); color: #3a7a8a;">她</div>
+            <h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #3a7a8a;">观 她</h3>
+          </div>
+          <div class="sutra-text space-y-3" style="padding-left: 0.25rem;">
+            <p v-for="(para, pi) in chapter.heartBarrier.understandHer.split('\n').filter(Boolean)" :key="pi" style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20;">{{ para }}</p>
+          </div>
+        </div>
+
+        <!-- 观己 -->
+        <div class="five-mirror-card" style="border-left: 4px solid #8b4513;">
+          <div class="five-mirror-header">
+            <div class="five-mirror-icon" style="background: rgba(139,69,19,0.1); color: #8b4513;">己</div>
+            <h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #8b4513;">观 己</h3>
+          </div>
+          <div class="sutra-text space-y-3" style="padding-left: 0.25rem;">
+            <p v-for="(para, pi) in chapter.heartBarrier.observeSelf.split('\n').filter(Boolean)" :key="pi" style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20;">{{ para }}</p>
+          </div>
+        </div>
+
+        <!-- 中道 -->
+        <div class="five-mirror-card" style="border-left: 4px solid #6048a0;">
+          <div class="five-mirror-header">
+            <div class="five-mirror-icon" style="background: rgba(96,72,160,0.1); color: #6048a0;">中</div>
+            <h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #6048a0;">中 道</h3>
+          </div>
+          <p style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20; padding-left: 0.25rem;">{{ chapter.heartBarrier.middleWay }}</p>
+        </div>
+
+        <!-- 实修 -->
+        <div class="five-mirror-card" style="border-left: 4px solid #2d6a4a;">
+          <div class="five-mirror-header">
+            <div class="five-mirror-icon" style="background: rgba(45,106,74,0.1); color: #2d6a4a;">修</div>
+            <h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #2d6a4a;">觉 察 练 习</h3>
+          </div>
+          <div class="sutra-text space-y-3" style="padding-left: 0.25rem;">
+            <p v-for="(para, pi) in chapter.heartBarrier.practice.split('\n').filter(Boolean)" :key="pi" style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20;">{{ para }}</p>
+          </div>
+        </div>
+
+        <!-- 心法 + 行动 + 禁行 + 待她 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+          <div class="card card-hover" style="padding: 1.5rem; border-left: 3px solid #c04040;">
+            <div class="flex items-center gap-2 mb-2"><span style="font-size: 1.2rem;">&#x1f4ac;</span><h3 style="font-size: 1rem; font-weight: 700; color: #c04040; letter-spacing: 0.1em;">一 句 心 法</h3></div>
+            <p style="font-size: var(--text-body-sm); line-height: 1.9; color: #4a3a20; font-style: italic;">{{ chapter.heartBarrier.heartMantra }}</p>
+          </div>
+          <div class="card card-hover" style="padding: 1.5rem; border-left: 3px solid #c06030;">
+            <div class="flex items-center gap-2 mb-2"><span style="font-size: 1.2rem;">&#x270A;</span><h3 style="font-size: 1rem; font-weight: 700; color: #c06030; letter-spacing: 0.1em;">今 日 行 动</h3></div>
+            <p style="font-size: var(--text-body-sm); line-height: 1.9; color: #4a3a20;">{{ chapter.heartBarrier.dailyAction }}</p>
+          </div>
+          <div class="card card-hover" style="padding: 1.5rem; border-left: 3px solid #8b0000;">
+            <div class="flex items-center gap-2 mb-2"><span style="font-size: 1.2rem;">&#x26D4;</span><h3 style="font-size: 1rem; font-weight: 700; color: #8b0000; letter-spacing: 0.1em;">禁 行</h3></div>
+            <p style="font-size: var(--text-body-sm); line-height: 1.9; color: #4a3a20; font-weight: 600;">{{ chapter.heartBarrier.forbidden }}</p>
+          </div>
+          <div class="card card-hover" style="padding: 1.5rem; border-left: 3px solid #2d6a4a;">
+            <div class="flex items-center gap-2 mb-2"><span style="font-size: 1.2rem;">&#x1F90D;</span><h3 style="font-size: 1rem; font-weight: 700; color: #2d6a4a; letter-spacing: 0.1em;">待 她 之 道</h3></div>
+            <p style="font-size: var(--text-body-sm); line-height: 1.9; color: #4a3a20;">{{ chapter.heartBarrier.treatHer }}</p>
+          </div>
+        </div>
+      </section>
+      <div v-if="chapter.heartBarrier" class="gold-line" />
 
       <!-- 10. 人伦修行 — 四种关系中的般若智慧 -->
       <section v-if="chapter.relationshipWisdom" id="relationships" class="section-paper">
