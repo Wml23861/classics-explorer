@@ -24,10 +24,10 @@ const hexagrams = [
 ];
 
 function makeSvg(id, name, lines) {
-  const w = 200, h = 280;
-  const top = 40, gap = 36;
-  const lineW = 140, lineH = 8, x = (w - lineW) / 2;
-  const breakGap = 30; // gap for broken (yin) lines
+  const w = 260, h = 300;
+  const top = 45, gap = 36;
+  const lineW = 160, lineH = 8, x = (w - lineW) / 2;
+  const breakGap = 34; // gap for broken (yin) lines
   const yangColor = '#c0392b'; // red
   const yinColor = '#2c3e50';  // dark
 
@@ -47,19 +47,22 @@ function makeSvg(id, name, lines) {
     // Yao label on the right
     const yaoNames = ['初', '二', '三', '四', '五', '上'];
     const yinYangLabel = isYang ? '九' : '六';
+    // 初/上: label is position-first (初九, 上六)
+    // 二/三/四/五: label is yin-yang first (九二, 六三)
+    const label = (i === 0 || i === 5) ? `${yaoNames[i]}${yinYangLabel}` : `${yinYangLabel}${yaoNames[i]}`;
     const labelY = y + lineH / 2 + 5;
-    linesSvg += `  <text x="${x + lineW + 12}" y="${labelY}" font-size="11" fill="#888" font-family="sans-serif">${yaoNames[i]}${yinYangLabel}</text>\n`;
+    linesSvg += `  <text x="${x + lineW + 14}" y="${labelY}" font-size="13" fill="#666" font-family="sans-serif">${label}</text>\n`;
   }
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}">
   <rect width="${w}" height="${h}" fill="#fefcf7" rx="8"/>
   <!-- Hexagram name -->
-  <text x="${w/2}" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#5a4020" font-family="serif">${name}</text>
+  <text x="${w/2}" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#5a4020" font-family="serif">${name}</text>
   <!-- Yao lines -->
 ${linesSvg}
   <!-- Hexagram number -->
-  <text x="${w/2}" y="${h - 8}" text-anchor="middle" font-size="10" fill="#b8a080" font-family="serif">第${id}卦</text>
+  <text x="${w/2}" y="${h - 8}" text-anchor="middle" font-size="14" fill="#8b6914" font-family="serif">第${id}卦</text>
 </svg>`;
 }
 

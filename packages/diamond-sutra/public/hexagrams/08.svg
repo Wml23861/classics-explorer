@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280" width="200" height="280">
-  <rect width="200" height="280" fill="#fefcf7" rx="8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 300" width="260" height="300">
+  <rect width="260" height="300" fill="#fefcf7" rx="8"/>
   <!-- Hexagram name -->
-  <text x="100" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#5a4020" font-family="serif">水地比</text>
+  <text x="130" y="28" text-anchor="middle" font-size="18" font-weight="bold" fill="#5a4020" font-family="serif">水地比</text>
   <!-- Yao lines -->
-  <rect x="30" y="40" width="55" height="8" rx="3" fill="#2c3e50"/>
-  <rect x="115" y="40" width="55" height="8" rx="3" fill="#2c3e50"/>
-  <text x="182" y="49" font-size="11" fill="#888" font-family="sans-serif">上六</text>
-  <rect x="30" y="76" width="140" height="8" rx="3" fill="#c0392b"/>
-  <text x="182" y="85" font-size="11" fill="#888" font-family="sans-serif">五九</text>
-  <rect x="30" y="112" width="55" height="8" rx="3" fill="#2c3e50"/>
-  <rect x="115" y="112" width="55" height="8" rx="3" fill="#2c3e50"/>
-  <text x="182" y="121" font-size="11" fill="#888" font-family="sans-serif">四六</text>
-  <rect x="30" y="148" width="55" height="8" rx="3" fill="#2c3e50"/>
-  <rect x="115" y="148" width="55" height="8" rx="3" fill="#2c3e50"/>
-  <text x="182" y="157" font-size="11" fill="#888" font-family="sans-serif">三六</text>
-  <rect x="30" y="184" width="55" height="8" rx="3" fill="#2c3e50"/>
-  <rect x="115" y="184" width="55" height="8" rx="3" fill="#2c3e50"/>
-  <text x="182" y="193" font-size="11" fill="#888" font-family="sans-serif">二六</text>
-  <rect x="30" y="220" width="55" height="8" rx="3" fill="#2c3e50"/>
-  <rect x="115" y="220" width="55" height="8" rx="3" fill="#2c3e50"/>
-  <text x="182" y="229" font-size="11" fill="#888" font-family="sans-serif">初六</text>
+  <rect x="50" y="45" width="63" height="8" rx="3" fill="#2c3e50"/>
+  <rect x="147" y="45" width="63" height="8" rx="3" fill="#2c3e50"/>
+  <text x="224" y="54" font-size="13" fill="#666" font-family="sans-serif">上六</text>
+  <rect x="50" y="81" width="160" height="8" rx="3" fill="#c0392b"/>
+  <text x="224" y="90" font-size="13" fill="#666" font-family="sans-serif">九五</text>
+  <rect x="50" y="117" width="63" height="8" rx="3" fill="#2c3e50"/>
+  <rect x="147" y="117" width="63" height="8" rx="3" fill="#2c3e50"/>
+  <text x="224" y="126" font-size="13" fill="#666" font-family="sans-serif">六四</text>
+  <rect x="50" y="153" width="63" height="8" rx="3" fill="#2c3e50"/>
+  <rect x="147" y="153" width="63" height="8" rx="3" fill="#2c3e50"/>
+  <text x="224" y="162" font-size="13" fill="#666" font-family="sans-serif">六三</text>
+  <rect x="50" y="189" width="63" height="8" rx="3" fill="#2c3e50"/>
+  <rect x="147" y="189" width="63" height="8" rx="3" fill="#2c3e50"/>
+  <text x="224" y="198" font-size="13" fill="#666" font-family="sans-serif">六二</text>
+  <rect x="50" y="225" width="63" height="8" rx="3" fill="#2c3e50"/>
+  <rect x="147" y="225" width="63" height="8" rx="3" fill="#2c3e50"/>
+  <text x="224" y="234" font-size="13" fill="#666" font-family="sans-serif">初六</text>
 
   <!-- Hexagram number -->
-  <text x="100" y="272" text-anchor="middle" font-size="10" fill="#b8a080" font-family="serif">第8卦</text>
+  <text x="130" y="292" text-anchor="middle" font-size="14" fill="#8b6914" font-family="serif">第8卦</text>
 </svg>

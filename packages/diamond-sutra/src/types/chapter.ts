@@ -100,8 +100,14 @@ export interface Chapter {
 
   // === 情关参究（金刚经专用） ===
   heartBarrier?: HeartBarrierPractice
+  /** 她心即佛心 — 以本品般若智慧帮她找回安全感、觉察自己、做自己 */
+  herHeart?: HerHeartPractice
 
   // === 道德经专用字段 ===
+  /** 情关参究（道家版） — 以本章道门智慧参究亲密关系中的情执与觉醒 */
+  taoHeartBarrier?: TaoHeartBarrierPractice
+  /** 她心即道心 — 帮她找回安全感、觉察自己、做自己，以道养心 */
+  taoHerHeart?: TaoHerHeartPractice
   /** 道门五镜 — 玄/虚/柔/反/自然 */
   taoistFiveMirrors?: TaoistFiveMirrors
   /** 六维分析 */
@@ -138,6 +144,32 @@ export interface HeartBarrierPractice {
   treatHer: string
 }
 
+/** 她心即佛心 — 帮她找回安全感、觉察自己、做自己 */
+export interface HerHeartPractice {
+  /** 安处 — 她想回去却不确定能不能回去的安静角落 */
+  safeCorner: string
+  /** 水镜 — 以本品智慧为镜，照见她的内心波纹，不强迫 */
+  waterMirror: string
+  /** 他眼 — 你在她眼中是什么样子 */
+  hisEyes: string
+  /** 自湖 — 她独处时的内心在经历什么 */
+  herLake: string
+  /** 双岸 — 她的中道：不因亲密失去自己，不因恐惧永远逃离 */
+  twoShores: string
+  /** 一息 — 极简身体锚定，窒息感涌上时可以悄悄做 */
+  oneBreath: string
+  /** 微风 — 一句不要求回复的温柔话 */
+  breeze: string
+  /** 微风默念 — 你自己心里为她默念的祝福 */
+  breezeSilent: string
+  /** 你手 — 你今天具体做什么，成为她的安全地基 */
+  yourHands: string
+  /** 雷池 — 你绝对不能越过的边界 */
+  thunderPool: string
+  /** 归灯 — 她回来了，你如何亮着一盏不追问不审判的灯 */
+  returnLight: string
+}
+
 // === 道德经专用类型 ===
 
 /** 道门五镜 — 玄虚柔反自然 */
@@ -172,4 +204,56 @@ export interface TaoistHigherDimension {
   cosmogony?: string
   systemsView?: string
   empiricalPractice?: string
+}
+
+// === 情关参究（道家版）类型 ===
+
+/** 情关参究（道家版） — 以本章道门智慧参究情关 */
+export interface TaoHeartBarrierPractice {
+  /** 守中 — 1-2句真实情境切入 */
+  trigger: string
+  /** 观复 — 以本章道门智慧观照情之循环往复 */
+  analysis: string
+  /** 鉴水 — 以上善若水为镜，映照她的内心 */
+  understandHer: string
+  /** 自知 — 觉察自己的执着与恐惧 */
+  observeSelf: string
+  /** 玄同 — 在执与舍之间，找到玄同之径 */
+  middleWay: string
+  /** 致虚 — 身体锚定，虚极生静的练习 */
+  practice: string
+  /** 得一 — 一句不散的道枢之言 */
+  heartMantra: string
+  /** 执古 — 今日以道御事的具体行动 */
+  dailyAction: string
+  /** 守柔 — 此刻绝不可做之事 */
+  forbidden: string
+  /** 若水 — 以水之姿，待她归来 */
+  treatHer: string
+}
+
+/** 她心即道心 — 帮她找回安全感、觉察自己、做自己 */
+export interface TaoHerHeartPractice {
+  /** 谷神 — 她内心幽深的安静角落 */
+  safeCorner: string
+  /** 澄明 — 以本章道门智慧帮她慢慢澄清 */
+  waterMirror: string
+  /** 袭明 — 你在她眼中是什么模样 */
+  hisEyes: string
+  /** 渊兮 — 她独处时的内心深渊 */
+  herLake: string
+  /** 玄牝 — 绵延不绝的中道 */
+  twoShores: string
+  /** 绵绵 — 极简身体锚定，如丝如缕不绝 */
+  oneBreath: string
+  /** 希言 — 少说、不说，说了就飘走的温柔话（可发） */
+  breeze: string
+  /** 守静 — 默念的祝福 */
+  breezeSilent: string
+  /** 执左 — 你做了好事不留债的具体行动 */
+  yourHands: string
+  /** 不割 — 你绝不可越过的边界 */
+  thunderPool: string
+  /** 复归 — 她回来了，归于朴素的迎接 */
+  returnLight: string
 }

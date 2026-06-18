@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { Chapter } from '../types/chapter'
-defineProps<{ chapter: Chapter; linkPrefix?: string }>()
+defineProps<{ chapter: any; linkPrefix?: string; total?: number }>()
 
 function badgeColor(id: number): string {
   const colors = [
@@ -25,7 +24,7 @@ function badgeColor(id: number): string {
           {{ chapter.id }}
         </div>
         <span class="text-[12px] tracking-[0.2em] font-mono" style="color: #b8a898;">
-          {{ String(chapter.id).padStart(2, '0') }}/32
+          {{ String(chapter.id).padStart(2, '0') }}/{{ total || 32 }}
         </span>
       </div>
 

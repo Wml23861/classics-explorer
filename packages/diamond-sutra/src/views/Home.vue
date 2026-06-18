@@ -28,6 +28,16 @@ const scriptures = [
     light: '#3d8a5f',
   },
   {
+    key: 'yijing',
+    name: '易经',
+    subtitle: 'I Ching · Book of Changes',
+    desc: '易有太极，是生两仪。六十四卦，观象玩辞，变易无穷。',
+    color: '#8b4513',
+    bg: 'rgba(139, 69, 19, 0.06)',
+    border: 'rgba(139, 69, 19, 0.2)',
+    light: '#a0522d',
+  },
+  {
     key: 'heart',
     name: '心经',
     subtitle: 'Prajñāpāramitā Hṛdaya',
@@ -220,7 +230,7 @@ const stats = [
             transform: visible ? 'translateY(0)' : 'translateY(24px)',
             transition: `all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) ${i * 80}ms`,
           }"
-          @click="s.key === 'diamond' ? router.push('/diamond') : s.key === 'tao' ? router.push('/tao') : router.push('/diamond/1')">
+          @click="s.key === 'diamond' ? router.push('/diamond') : s.key === 'tao' ? router.push('/tao') : s.key === 'yijing' ? router.push('/yijing') : router.push('/diamond/1')">
           <!-- Header -->
           <div class="flex items-center gap-3 mb-5">
             <div class="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold text-white transition-transform duration-300 group-hover:scale-110"

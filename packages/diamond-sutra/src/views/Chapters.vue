@@ -87,7 +87,7 @@ const grouped = computed(() => {
         </div>
         <div class="space-y-5 mb-10">
           <div v-for="(group, gi) in grouped.filter(g => g[0].id <= 37)" :key="'dao-'+gi" class="bento-grid">
-            <ChapterCard v-for="chapter in group" :key="chapter.id" :chapter="chapter" :link-prefix="linkPrefix" />
+            <ChapterCard v-for="chapter in group" :key="chapter.id" :chapter="chapter" :link-prefix="linkPrefix" :total="total" />
           </div>
         </div>
         <div v-if="data.filter(c => c.id >= 38).length > 0" class="mb-4 mt-10">
@@ -98,7 +98,7 @@ const grouped = computed(() => {
         </div>
         <div class="space-y-5">
           <div v-for="(group, gi) in grouped.filter(g => g[0].id >= 38)" :key="'de-'+gi" class="bento-grid">
-            <ChapterCard v-for="chapter in group" :key="chapter.id" :chapter="chapter" :link-prefix="linkPrefix" />
+            <ChapterCard v-for="chapter in group" :key="chapter.id" :chapter="chapter" :link-prefix="linkPrefix" :total="total" />
           </div>
         </div>
       </template>
@@ -107,7 +107,7 @@ const grouped = computed(() => {
       <template v-else>
         <div class="space-y-5">
           <div v-for="(group, gi) in grouped" :key="gi" class="bento-grid">
-            <ChapterCard v-for="chapter in group" :key="chapter.id" :chapter="chapter" :link-prefix="linkPrefix" />
+            <ChapterCard v-for="chapter in group" :key="chapter.id" :chapter="chapter" :link-prefix="linkPrefix" :total="total" />
           </div>
         </div>
       </template>

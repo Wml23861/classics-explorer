@@ -30,7 +30,7 @@ onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 const sect = ref('')
-const ids = ['original', 'essence', 'overview', 'fiveMirrors', 'scenarios', 'rushidao', 'fourFold', 'celebrity', 'classics', 'higher', 'heartBarrier', 'wangYangming', 'huineng', 'modernMasters', 'relationships', 'insights', 'modern', 'meditation', 'energy', 'questions', 'creator']
+const ids = ['original', 'essence', 'fiveMirrors', 'scenarios', 'rushidao', 'fourFold', 'celebrity', 'classics', 'higher', 'heartBarrier', 'herHeart', 'wangYangming', 'huineng', 'modernMasters', 'relationships', 'insights', 'modern', 'meditation', 'energy', 'questions', 'creator']
 function spy() { for (const id of [...ids].reverse()) { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top <= 160) { sect.value = id; break } } }
 onMounted(() => window.addEventListener('scroll', spy, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', spy))
@@ -38,6 +38,17 @@ onUnmounted(() => window.removeEventListener('scroll', spy))
 const originalText = computed(() => {
   if (!chapter.value) return ''
   const c = chapter.value as any
+  if (isYijing.value && c.hexagramOriginal) {
+    const lines = (c.lineAnalysis || []).map((l: any) => `${l.position}：${l.original}`).join('\n')
+    return [
+      c.hexagramOriginal,
+      c.tuanZhuan ? '\n' + c.tuanZhuan : '',
+      c.daXiangZhuan ? '\n' + c.daXiangZhuan : '',
+      lines ? '\n' + lines : '',
+      c.xiaoXiangZhuan ? '\n' + c.xiaoXiangZhuan : '',
+      c.wenYanZhuan ? '\n' + c.wenYanZhuan : '',
+    ].join('\n')
+  }
   return c.original || c.hexagramOriginal || ''
 })
 
@@ -110,13 +121,13 @@ function copy(t: string, id: string) { navigator.clipboard.writeText(t); copied.
 
 const sectionLabels: Record<string, string> = {
   original: '原文', essence: '要义', overview: '卦象', fiveMirrors: '五镜', scenarios: '场景', rushidao: '汇通',
-  fourFold: '四维', celebrity: '名人', classics: '融通', higher: '高维', heartBarrier: '情关', wangYangming: '心学', huineng: '六祖',
+  fourFold: '四维', celebrity: '名人', classics: '融通', higher: '高维', heartBarrier: '情关', herHeart: '她心', wangYangming: '心学', huineng: '六祖',
   modernMasters: '法师', relationships: '人伦', insights: '感悟', modern: '现代',
   meditation: '冥想', energy: '能量', questions: '问答', creator: '创作者',
 }
 const sectionChars: Record<string, string> = {
   original: '原', essence: '义', overview: '象', fiveMirrors: '镜', scenarios: '境', rushidao: '通',
-  fourFold: '四', celebrity: '名', classics: '融', higher: '维', heartBarrier: '情', wangYangming: '王', huineng: '慧',
+  fourFold: '四', celebrity: '名', classics: '融', higher: '维', heartBarrier: '情', herHeart: '她', wangYangming: '王', huineng: '慧',
   modernMasters: '师', relationships: '伦', insights: '悟', modern: '行',
   meditation: '静', energy: '能', questions: '问', creator: '明',
 }
@@ -147,6 +158,21 @@ const taoDimSources = [
   { key: 'cosmogony', label: '宇宙生成论', color: '#2d6a4a', icon: '宇' },
   { key: 'systemsView', label: '系统观', color: '#3a7a8a', icon: '系' },
   { key: 'empiricalPractice', label: '内证实修', color: '#3058c0', icon: '证' },
+]
+
+// Yijing classics bridge sources
+const yijingClassicSources = [
+  { key: 'diamondSutra', label: '金刚经', color: '#b8860b', icon: '金' },
+  { key: 'taoTeChing', label: '道德经', color: '#2d6a4a', icon: '道' },
+  { key: 'analects', label: '论语', color: '#c04040', icon: '论' },
+  { key: 'artOfWar', label: '孙子兵法', color: '#6048a0', icon: '兵' },
+]
+
+// Yijing higher dimension sources
+const yijingDimSources = [
+  { key: 'cosmology', label: '宇宙论', color: '#2d6a4a', icon: '宇' },
+  { key: 'mathematics', label: '数学原理', color: '#3a7a8a', icon: '数' },
+  { key: 'synchronicity', label: '共时性', color: '#3058c0', icon: '共' },
 ]
 </script>
 
@@ -229,14 +255,21 @@ const taoDimSources = [
           <div class="section-header-line" style="background: linear-gradient(90deg, rgba(180,130,30,0.15), transparent);" />
           <button @click="copy(originalText, 'original')" class="text-sm cursor-pointer bg-transparent border-none transition-colors ml-auto" :style="{ color: copied === 'original' ? '#5a8a40' : '#b8a080' }" title="复制">{{ copied === 'original' ? '✓ 已复制' : '复制' }}</button>
         </div>
+        <!-- 易经卦图 -->
+        <div v-if="isYijing && chapter.symbol" class="flex justify-center mb-6">
+          <img :src="chapter.symbol" :alt="chapter.title" style="max-width:180px;" class="rounded-lg" />
+        </div>
         <div class="sutra-text space-y-4">
           <p v-for="(para, pi) in originalText.split('\n').filter(Boolean)" :key="pi" style="text-indent: 2em; margin-bottom: 1.25rem;">{{ para }}</p>
         </div>
         <div v-if="isDiamond" class="mt-10 pt-8 border-t" style="border-color: rgba(180,150,100,0.15);">
           <p class="text-sm tracking-[0.15em]" style="color: #a09080;">姚秦 · 三藏法师鸠摩罗什 译</p>
         </div>
-        <div v-else class="mt-10 pt-8 border-t" style="border-color: rgba(180,150,100,0.15);">
+        <div v-else-if="isTaoist" class="mt-10 pt-8 border-t" style="border-color: rgba(180,150,100,0.15);">
           <p class="text-sm tracking-[0.15em]" style="color: #a09080;">春秋 · 老子 著</p>
+        </div>
+        <div v-else class="mt-10 pt-8 border-t" style="border-color: rgba(180,150,100,0.15);">
+          <p class="text-sm tracking-[0.15em]" style="color: #a09080;">周易 · 通行本</p>
         </div>
       </section>
       <div class="gold-line" />
@@ -254,48 +287,7 @@ const taoDimSources = [
       </section>
       <div class="gold-line" />
 
-      <!-- 2.5 卦象总览 — 易经专属 -->
-      <section v-if="isYijing && chapter.overview" id="overview" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(139,105,20,0.02) 50%, rgba(48,88,192,0.02) 100%);">
-        <div class="section-header">
-          <div class="section-header-bar" style="background: linear-gradient(180deg, #2d6a4a, #8b6914, #c04040);" />
-          <h2 class="section-header-title" style="color: #5a4020;">卦 象 总 览</h2>
-          <span class="section-header-subtitle">上下卦 · 五行 · 宫位 · 世应 · 综错互</span>
-          <div class="section-header-line" style="background: linear-gradient(90deg, rgba(90,64,32,0.1), transparent);" />
-        </div>
-        <!-- 卦形图 -->
-        <div class="flex justify-center mb-6">
-          <img :src="chapter.symbol" :alt="chapter.title" style="max-width:200px;" class="rounded-lg" />
-        </div>
-        <!-- 卦象信息网格 -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">上卦</div><div style="font-size:1.1rem;font-weight:700;color:#5a4020;">{{ chapter.overview.upperTrigram }}</div></div>
-          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">下卦</div><div style="font-size:1.1rem;font-weight:700;color:#5a4020;">{{ chapter.overview.lowerTrigram }}</div></div>
-          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">五行</div><div style="font-size:1.1rem;font-weight:700;color:#5a4020;">{{ chapter.overview.fiveElement }}</div></div>
-          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">卦德</div><div style="font-size:1.1rem;font-weight:700;color:#5a4020;">{{ chapter.overview.hexagramVirtue }}</div></div>
-          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">宫位</div><div style="font-size:1rem;font-weight:700;color:#5a4020;">{{ chapter.overview.palace }}</div></div>
-          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">世爻</div><div style="font-size:1.1rem;font-weight:700;color:#5a4020;">{{ chapter.overview.generationLayer }}</div></div>
-          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">应爻</div><div style="font-size:1.1rem;font-weight:700;color:#5a4020;">{{ chapter.overview.responseLayer }}</div></div>
-          <div class="card" style="padding:1rem; text-align:center;"><div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">干支</div><div style="font-size:0.9rem;font-weight:700;color:#5a4020;">{{ chapter.overview.tianGan }}{{ chapter.overview.diZhi }}</div></div>
-        </div>
-        <!-- 综卦/错卦/互卦 -->
-        <div v-if="chapter.relations" class="grid grid-cols-3 gap-3">
-          <div v-if="chapter.relations.inverseHexagram" class="card" style="padding:1rem; text-align:center; cursor:pointer;" @click="go(chapter.relations.inverseHexagram.id)">
-            <div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">综卦（颠倒）</div>
-            <div style="font-size:1rem;font-weight:700;color:#2d6a4a;">{{ chapter.relations.inverseHexagram.name }}</div>
-          </div>
-          <div v-if="chapter.relations.reverseHexagram" class="card" style="padding:1rem; text-align:center; cursor:pointer;" @click="go(chapter.relations.reverseHexagram.id)">
-            <div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">错卦（旁通）</div>
-            <div style="font-size:1rem;font-weight:700;color:#8b6914;">{{ chapter.relations.reverseHexagram.name }}</div>
-          </div>
-          <div v-if="chapter.relations.mutualHexagram" class="card" style="padding:1rem; text-align:center; cursor:pointer;" @click="go(chapter.relations.mutualHexagram.id)">
-            <div style="font-size:0.75rem;color:#a09080;letter-spacing:0.1em;">互卦</div>
-            <div style="font-size:1rem;font-weight:700;color:#c04040;">{{ chapter.relations.mutualHexagram.name }}</div>
-          </div>
-        </div>
-      </section>
-      <div v-if="isYijing && chapter.overview" class="gold-line" />
-
-      <!-- 2.6 易门五观 — 易经专属 -->
+      <!-- 2.5 易门五观 — 易经专属 -->
       <section v-if="isYijing && chapter.fiveViews" id="fiveMirrors" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(45,106,74,0.02) 50%, rgba(48,88,192,0.02) 100%);">
         <div class="section-header">
           <div class="section-header-bar" style="background: linear-gradient(180deg, #2d6a4a, #3a7a8a, #8b6914, #c04040, #6048a0);" />
@@ -410,7 +402,7 @@ const taoDimSources = [
       </section>
 
       <!-- 4.5b 六维分析 — 道德经专用 -->
-      <section v-if="!isDiamond && chapter.sixFoldAnalysis" id="fourFold" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(45,106,74,0.02) 50%, rgba(48,88,192,0.02) 100%);">
+      <section v-if="isTaoist && chapter.sixFoldAnalysis" id="fourFold" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(45,106,74,0.02) 50%, rgba(48,88,192,0.02) 100%);">
         <div class="section-header">
           <div class="section-header-bar" style="background: linear-gradient(180deg, #2d6a4a, #3a7a8a, #c04040, #c06030, #4a148c, #3058c0);" />
           <h2 class="section-header-title" style="color: #5a4020;">六 维 分 析</h2>
@@ -426,7 +418,24 @@ const taoDimSources = [
           <div class="card card-hover" style="padding: 1.5rem; border-left: 3px solid #3058c0;"><div class="flex items-center gap-2 mb-3"><div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white" style="background: #3058c0;">西</div><h3 style="font-size: 1.125rem; font-weight: 700; color: #3058c0; letter-spacing: 0.1em;">西方哲学</h3></div><p style="font-size: var(--text-body-sm); line-height: 1.9; color: #5a4a30;">{{ chapter.sixFoldAnalysis.westernPhilosophy }}</p></div>
         </div>
       </section>
-      <div v-if="chapter.fourFoldAnalysis || chapter.sixFoldAnalysis" class="gold-line" />
+      <!-- 4.5c 六维通贯 — 易经专用 -->
+      <section v-if="isYijing && chapter.sixFold" id="fourFold" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(139,105,20,0.02) 50%, rgba(48,88,192,0.02) 100%);">
+        <div class="section-header">
+          <div class="section-header-bar" style="background: linear-gradient(180deg, #b8860b, #2d6a4a, #3a7a8a, #c04040, #4a148c, #3058c0);" />
+          <h2 class="section-header-title" style="color: #8b6914;">六 维 通 贯</h2>
+          <span class="section-header-subtitle">儒家十翼 · 道家老庄 · 佛家般若 · 中医藏象 · 系统科学 · 西方哲学</span>
+          <div class="section-header-line" style="background: linear-gradient(90deg, rgba(139,105,20,0.1), transparent);" />
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="card card-hover" style="padding: 1.5rem; border-left: 3px solid #c04040;"><div class="flex items-center gap-2 mb-3"><div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white" style="background: #c04040;">儒</div><h3 style="font-size: 1.125rem; font-weight: 700; color: #c04040;">儒家十翼</h3></div><p style="font-size: var(--text-body-sm); line-height: 1.9;">{{ chapter.sixFold.confucianWings }}</p></div>
+          <div class="card card-hover" style="padding: 1.5rem; border-left: 3px solid #2d6a4a;"><div class="flex items-center gap-2 mb-3"><div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white" style="background: #2d6a4a;">道</div><h3 style="font-size: 1.125rem; font-weight: 700; color: #2d6a4a;">道家老庄</h3></div><p style="font-size: var(--text-body-sm); line-height: 1.9;">{{ chapter.sixFold.taoistLaozhuang }}</p></div>
+          <div class="card card-hover" style="padding: 1.5rem; border-left: 3px solid #b8860b;"><div class="flex items-center gap-2 mb-3"><div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white" style="background: #b8860b;">佛</div><h3 style="font-size: 1.125rem; font-weight: 700; color: #b8860b;">佛家般若</h3></div><p style="font-size: var(--text-body-sm); line-height: 1.9;">{{ chapter.sixFold.buddhistPrajna }}</p></div>
+          <div class="card card-hover" style="padding: 1.5rem; border-left: 3px solid #3a7a8a;"><div class="flex items-center gap-2 mb-3"><div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white" style="background: #3a7a8a;">医</div><h3 style="font-size: 1.125rem; font-weight: 700; color: #3a7a8a;">中医藏象</h3></div><p style="font-size: var(--text-body-sm); line-height: 1.9;">{{ chapter.sixFold.medicineViscera }}</p></div>
+          <div class="card card-hover" style="padding: 1.5rem; border-left: 3px solid #3058c0;"><div class="flex items-center gap-2 mb-3"><div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white" style="background: #3058c0;">系</div><h3 style="font-size: 1.125rem; font-weight: 700; color: #3058c0;">系统科学</h3></div><p style="font-size: var(--text-body-sm); line-height: 1.9;">{{ chapter.sixFold.systemsScience }}</p></div>
+          <div class="card card-hover" style="padding: 1.5rem; border-left: 3px solid #4a148c;"><div class="flex items-center gap-2 mb-3"><div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white" style="background: #4a148c;">西</div><h3 style="font-size: 1.125rem; font-weight: 700; color: #4a148c;">西方哲学</h3></div><p style="font-size: var(--text-body-sm); line-height: 1.9;">{{ chapter.sixFold.westernPhilosophy }}</p></div>
+        </div>
+      </section>
+      <div v-if="chapter.fourFoldAnalysis || chapter.sixFoldAnalysis || chapter.sixFold" class="gold-line" />
 
       <!-- 4.6 名人分析 — 古今中外名人视角 -->
       <section v-if="chapter.celebrityAnalysis" id="celebrity" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(139,105,20,0.02) 50%, rgba(192,64,64,0.02) 100%);">
@@ -496,7 +505,7 @@ const taoDimSources = [
       </section>
 
       <!-- 5b. 四经融通 — Taoist version -->
-      <section v-if="!isDiamond" id="classics" class="section-paper">
+      <section v-if="isTaoist" id="classics" class="section-paper">
         <div class="section-header">
           <div class="section-header-bar" style="background: linear-gradient(180deg, #b8860b, #c04040, #6048a0, #3a7a8a);" />
           <h2 class="section-header-title" style="color: #2d6a4a;">四 经 融 通</h2>
@@ -507,6 +516,20 @@ const taoDimSources = [
           <div v-for="src in taoClassicSources" :key="src.key" v-show="(chapter.taoistClassicsBridge as any)[src.key]" class="card card-hover" style="padding: 1.5rem;"><div class="flex items-center gap-3 mb-4"><div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white" :style="{ background: src.color }">{{ src.icon }}</div><span class="text-base font-semibold tracking-[0.15em]" :style="{ color: src.color }">{{ src.label }}</span></div><p style="font-size: var(--text-body-sm); line-height: 1.9; color: #5a4a30;">{{ (chapter.taoistClassicsBridge as any)[src.key] }}</p></div>
         </div>
         <div v-else class="text-center py-8"><p class="text-base tracking-wider" style="color: #a09080;">此章融通内容正在精心编撰中，敬请期待。</p></div>
+      </section>
+
+      <!-- 5c. 四经融通 — Yijing version -->
+      <section v-if="isYijing" id="classics" class="section-paper">
+        <div class="section-header">
+          <div class="section-header-bar" style="background: linear-gradient(180deg, #b8860b, #2d6a4a, #c04040, #6048a0);" />
+          <h2 class="section-header-title" style="color: #8b6914;">四 经 融 通</h2>
+          <span class="section-header-subtitle">金刚经 · 道德经 · 论语 · 孙子兵法</span>
+          <div class="section-header-line" style="background: linear-gradient(90deg, rgba(139,105,20,0.12), transparent);" />
+        </div>
+        <div v-if="chapter.classicsBridge" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div v-for="src in yijingClassicSources" :key="src.key" v-show="(chapter.classicsBridge as any)[src.key]" class="card card-hover" style="padding: 1.5rem;"><div class="flex items-center gap-3 mb-4"><div class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white" :style="{ background: src.color }">{{ src.icon }}</div><span class="text-base font-semibold tracking-[0.15em]" :style="{ color: src.color }">{{ src.label }}</span></div><p style="font-size: var(--text-body-sm); line-height: 1.9; color: #5a4a30;">{{ (chapter.classicsBridge as any)[src.key] }}</p></div>
+        </div>
+        <div v-else class="text-center py-8"><p class="text-base tracking-wider" style="color: #a09080;">此卦融通内容正在精心编撰中，敬请期待。</p></div>
       </section>
       <div class="gold-line" />
 
@@ -520,14 +543,71 @@ const taoDimSources = [
       </section>
 
       <!-- 6b. 高维视角 — Taoist version -->
-      <section v-if="!isDiamond" id="higher" class="section-paper">
+      <section v-if="isTaoist" id="higher" class="section-paper">
         <div class="section-header"><div class="section-header-bar" style="background: linear-gradient(180deg, #2d6a4a, #3a7a8a, #3058c0);" /><h2 class="section-header-title" style="color: #2d6a4a;">高 维 视 角</h2><span class="section-header-subtitle">宇宙生成论 · 系统观 · 内证实修</span><div class="section-header-line" style="background: linear-gradient(90deg, rgba(45,106,74,0.1), transparent);" /></div>
         <div v-if="chapter.taoistHigherDimension" class="space-y-4">
           <div v-for="ds in taoDimSources" :key="ds.key" v-show="(chapter.taoistHigherDimension as any)[ds.key]" class="numbered-item" :style="{ borderLeft: `3px solid ${ds.color}33` }"><div class="numbered-badge" :style="{ background: `${ds.color}14`, color: ds.color }">{{ ds.icon }}</div><div><h4 style="font-size: var(--text-body-sm); font-weight: 600; letter-spacing: 0.12em; margin-bottom: 0.5rem;" :style="{ color: ds.color }">{{ ds.label }}</h4><p style="font-size: var(--text-body-sm); line-height: 1.9; color: #5a4a30;">{{ (chapter.taoistHigherDimension as any)[ds.key] }}</p></div></div>
         </div>
         <div v-else class="text-center py-8"><p class="text-base tracking-wider" style="color: #a09080;">此章高维视角内容正在精心编撰中，敬请期待。</p></div>
       </section>
+      <!-- 6c. 高维视角 — Yijing version -->
+      <section v-if="isYijing" id="higher" class="section-paper">
+        <div class="section-header"><div class="section-header-bar" style="background: linear-gradient(180deg, #8b6914, #2d6a4a, #3058c0);" /><h2 class="section-header-title" style="color: #8b6914;">高 维 视 角</h2><span class="section-header-subtitle">宇宙论 · 数学原理 · 共时性</span><div class="section-header-line" style="background: linear-gradient(90deg, rgba(139,105,20,0.1), transparent);" /></div>
+        <div v-if="chapter.higherDimension" class="space-y-4">
+          <div v-for="ds in yijingDimSources" :key="ds.key" v-show="(chapter.higherDimension as any)[ds.key]" class="numbered-item" :style="{ borderLeft: `3px solid ${ds.color}33` }"><div class="numbered-badge" :style="{ background: `${ds.color}14`, color: ds.color }">{{ ds.icon }}</div><div><h4 style="font-size: var(--text-body-sm); font-weight: 600; letter-spacing: 0.12em; margin-bottom: 0.5rem;" :style="{ color: ds.color }">{{ ds.label }}</h4><p style="font-size: var(--text-body-sm); line-height: 1.9; color: #5a4a30;">{{ (chapter.higherDimension as any)[ds.key] }}</p></div></div>
+        </div>
+        <div v-else class="text-center py-8"><p class="text-base tracking-wider" style="color: #a09080;">此卦高维视角内容正在精心编撰中，敬请期待。</p></div>
+      </section>
       <div class="gold-line" />
+
+      <!-- 6.5 情关参究（道家版） -->
+      <section v-if="isTaoist && chapter.taoHeartBarrier" id="heartBarrier" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(192,64,64,0.02) 50%, rgba(45,106,74,0.02) 100%);">
+        <div class="section-header">
+          <div class="section-header-bar" style="background: linear-gradient(180deg, #c04040, #2d6a4a, #8b6914, #c04040);" />
+          <h2 class="section-header-title" style="color: #c04040;">情 关 参 究</h2>
+          <span class="section-header-subtitle">守中 · 观复 · 鉴水 · 自知 · 玄同 · 致虚 · 得一 · 执古 · 守柔 · 若水</span>
+          <div class="section-header-line" style="background: linear-gradient(90deg, rgba(192,64,64,0.12), transparent);" />
+        </div>
+        <div class="five-mirror-card" style="border-left: 4px solid #c04040;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(192,64,64,0.1); color: #c04040;">守</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #c04040;">守 中</h3></div><p style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20; padding-left: 0.25rem; font-style: italic;">{{ chapter.taoHeartBarrier.trigger }}</p></div>
+        <div class="five-mirror-card" style="border-left: 4px solid #2d6a4a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(45,106,74,0.1); color: #2d6a4a;">观</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #2d6a4a;">观 复</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.taoHeartBarrier.analysis.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+        <div class="five-mirror-card" style="border-left: 4px solid #3a7a8a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(58,122,138,0.1); color: #3a7a8a;">鉴</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #3a7a8a;">鉴 水</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.taoHeartBarrier.understandHer }}</p></div>
+        <div class="five-mirror-card" style="border-left: 4px solid #8b4513;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(139,69,19,0.1); color: #8b4513;">自</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #8b4513;">自 知</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.taoHeartBarrier.observeSelf }}</p></div>
+        <div class="five-mirror-card" style="border-left: 4px solid #6048a0;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(96,72,160,0.1); color: #6048a0;">玄</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #6048a0;">玄 同</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.taoHeartBarrier.middleWay }}</p></div>
+        <div class="five-mirror-card" style="border-left: 4px solid #c06030;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(192,96,48,0.1); color: #c06030;">致</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #c06030;">致 虚</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.taoHeartBarrier.practice }}</p></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #2d6a4a;"><div class="flex items-center gap-2 mb-2"><h3 style="font-size:1rem;font-weight:700;color:#2d6a4a;letter-spacing:0.1em;">得 一 · 心 法</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-style:italic;">{{ chapter.taoHeartBarrier.heartMantra }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #c06030;"><div class="flex items-center gap-2 mb-2"><h3 style="font-size:1rem;font-weight:700;color:#c06030;letter-spacing:0.1em;">执 古 · 行 动</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;">{{ chapter.taoHeartBarrier.dailyAction }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #8b0000;"><div class="flex items-center gap-2 mb-2"><h3 style="font-size:1rem;font-weight:700;color:#8b0000;letter-spacing:0.1em;">守 柔 · 禁 行</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-weight:600;">{{ chapter.taoHeartBarrier.forbidden }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #b8860b;"><div class="flex items-center gap-2 mb-2"><h3 style="font-size:1rem;font-weight:700;color:#b8860b;letter-spacing:0.1em;">若 水 · 待 她</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;">{{ chapter.taoHeartBarrier.treatHer }}</p></div>
+        </div>
+      </section>
+      <div v-if="isTaoist && chapter.taoHeartBarrier" class="gold-line" />
+
+      <!-- 6.8 她心即道心 -->
+      <section v-if="isTaoist && chapter.taoHerHeart" id="herHeart" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(184,134,11,0.02) 50%, rgba(45,106,74,0.02) 100%);">
+        <div class="section-header">
+          <div class="section-header-bar" style="background: linear-gradient(180deg, #b8860b, #2d6a4a, #8b6914, #b8860b);" />
+          <h2 class="section-header-title" style="color: #8b6914;">她 心 即 道 心</h2>
+          <span class="section-header-subtitle">谷神 · 澄明 · 袭明 · 渊兮 · 玄牝 · 绵绵 · 希言 · 守静 · 执左 · 不割 · 复归</span>
+          <div class="section-header-line" style="background: linear-gradient(90deg, rgba(139,105,20,0.12), transparent);" />
+        </div>
+        <div class="space-y-5">
+          <div class="five-mirror-card" style="border-left: 4px solid #b8860b;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(184,134,11,0.1); color: #b8860b;">谷</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #8b6914;">谷 神</h3></div><p style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20; padding-left: 0.25rem; font-style: italic;">{{ chapter.taoHerHeart.safeCorner }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #3a7a8a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(58,122,138,0.1); color: #3a7a8a;">澄</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #3a7a8a;">澄 明</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.taoHerHeart.waterMirror.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #3058c0;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(48,88,192,0.1); color: #3058c0;">袭</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #3058c0;">袭 明</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.taoHerHeart.hisEyes }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #2d6a4a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(45,106,74,0.1); color: #2d6a4a;">渊</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #2d6a4a;">渊 兮</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.taoHerHeart.herLake.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #6048a0;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(96,72,160,0.1); color: #6048a0;">牝</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #6048a0;">玄 牝</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.taoHerHeart.twoShores }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #c06030;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(192,96,48,0.1); color: #c06030;">绵</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #c06030;">绵 绵</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.taoHerHeart.oneBreath.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #b8860b;"><div class="flex items-center gap-2 mb-2"><h3 style="font-size:1rem;font-weight:700;color:#b8860b;letter-spacing:0.1em;">希 言（可发）</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-style:italic;">{{ chapter.taoHerHeart.breeze }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #3a7a8a;"><div class="flex items-center gap-2 mb-2"><h3 style="font-size:1rem;font-weight:700;color:#3a7a8a;letter-spacing:0.1em;">守 静（默念）</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-style:italic;">{{ chapter.taoHerHeart.breezeSilent }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #2d6a4a;"><div class="flex items-center gap-2 mb-2"><h3 style="font-size:1rem;font-weight:700;color:#2d6a4a;letter-spacing:0.1em;">执 左</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;">{{ chapter.taoHerHeart.yourHands }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #8b0000;"><div class="flex items-center gap-2 mb-2"><h3 style="font-size:1rem;font-weight:700;color:#8b0000;letter-spacing:0.1em;">不 割</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-weight:600;">{{ chapter.taoHerHeart.thunderPool }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #c06030;grid-column: 1 / -1;"><div class="flex items-center gap-2 mb-2"><h3 style="font-size:1rem;font-weight:700;color:#c06030;letter-spacing:0.1em;">复 归</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;">{{ chapter.taoHerHeart.returnLight }}</p></div>
+        </div>
+      </section>
+      <div v-if="isTaoist && chapter.taoHerHeart" class="gold-line" />
 
       <!-- 7. 王阳明心学 -->
       <section v-if="chapter.wangYangming" id="wangYangming" class="section-paper">
@@ -663,6 +743,46 @@ const taoDimSources = [
         </div>
       </section>
       <div v-if="chapter.heartBarrier" class="gold-line" />
+
+      <!-- 9.8 她心即佛心 — 帮她找回安全感、觉察自己、做自己 -->
+      <section v-if="chapter.herHeart" id="herHeart" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(184,134,11,0.02) 50%, rgba(45,106,74,0.02) 100%);">
+        <div class="section-header">
+          <div class="section-header-bar" style="background: linear-gradient(180deg, #b8860b, #8b6914, #2d6a4a, #b8860b);" />
+          <h2 class="section-header-title" style="color: #8b6914;">她 心 即 佛 心</h2>
+          <span class="section-header-subtitle">安处 · 水镜 · 他眼 · 自湖 · 双岸 · 一息 · 微风 · 你手 · 雷池 · 归灯</span>
+          <div class="section-header-line" style="background: linear-gradient(90deg, rgba(139,105,20,0.12), transparent);" />
+        </div>
+
+        <div class="space-y-5">
+          <!-- 安处 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #b8860b;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(184,134,11,0.1); color: #b8860b;">安</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #8b6914;">安 处</h3></div><p style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20; padding-left: 0.25rem; font-style: italic;">{{ chapter.herHeart.safeCorner }}</p></div>
+
+          <!-- 水镜 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #3a7a8a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(58,122,138,0.1); color: #3a7a8a;">镜</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #3a7a8a;">水 镜</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.herHeart.waterMirror.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+
+          <!-- 他眼 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #3058c0;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(48,88,192,0.1); color: #3058c0;">他</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #3058c0;">他 眼</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.herHeart.hisEyes }}</p></div>
+
+          <!-- 自湖 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #2d6a4a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(45,106,74,0.1); color: #2d6a4a;">湖</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #2d6a4a;">自 湖</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.herHeart.herLake.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+
+          <!-- 双岸 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #6048a0;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(96,72,160,0.1); color: #6048a0;">岸</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #6048a0;">双 岸</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.herHeart.twoShores }}</p></div>
+
+          <!-- 一息 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #c06030;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(192,96,48,0.1); color: #c06030;">息</div><h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #c06030;">一 息</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.herHeart.oneBreath.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+        </div>
+
+        <!-- 四卡片grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #b8860b;"><div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x1F343;</span><h3 style="font-size:1rem;font-weight:700;color:#b8860b;letter-spacing:0.1em;">微 风（可发）</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-style:italic;">{{ chapter.herHeart.breeze }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #3a7a8a;"><div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x1F390;</span><h3 style="font-size:1rem;font-weight:700;color:#3a7a8a;letter-spacing:0.1em;">微 风（默念）</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-style:italic;">{{ chapter.herHeart.breezeSilent }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #2d6a4a;"><div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x270A;</span><h3 style="font-size:1rem;font-weight:700;color:#2d6a4a;letter-spacing:0.1em;">你 手</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;">{{ chapter.herHeart.yourHands }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #8b0000;"><div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x26D4;</span><h3 style="font-size:1rem;font-weight:700;color:#8b0000;letter-spacing:0.1em;">雷 池</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-weight:600;">{{ chapter.herHeart.thunderPool }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #c06030;grid-column: 1 / -1;"><div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x1F4AE;</span><h3 style="font-size:1rem;font-weight:700;color:#c06030;letter-spacing:0.1em;">归 灯</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;">{{ chapter.herHeart.returnLight }}</p></div>
+        </div>
+      </section>
+      <div v-if="chapter.herHeart" class="gold-line" />
 
       <!-- 10. 人伦修行 — 四种关系中的般若智慧 -->
       <section v-if="chapter.relationshipWisdom" id="relationships" class="section-paper">
