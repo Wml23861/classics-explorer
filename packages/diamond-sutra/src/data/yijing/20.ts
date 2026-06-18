@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '风地观',
   subtitle: '观天之神道省方观民，设教天下',
-  symbol: '/diamond-sutra/hexagrams/20.svg',
+  symbol: '/hexagrams/20.svg',
   hexagramOriginal:
     '观：盥而不荐，有孚颙若。',
   tuanZhuan:

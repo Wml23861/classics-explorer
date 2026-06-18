@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '风水涣',
   subtitle: '风行水上先王以享于帝立庙',
-  symbol: '/diamond-sutra/hexagrams/59.svg',
+  symbol: '/hexagrams/59.svg',
   hexagramOriginal: '涣：亨。王假有庙，利涉大川，利贞。',
   tuanZhuan: '彖曰：涣亨，刚来而不穷，柔得位乎外而上同。王假有庙，王乃在中也。利涉大川，乘木有功也。',
   daXiangZhuan: '象曰：风行水上，涣。先王以享于帝立庙。',

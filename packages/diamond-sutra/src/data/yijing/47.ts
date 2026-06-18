@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '泽水困',
   subtitle: '泽无水君子以致命遂志',
-  symbol: '/diamond-sutra/hexagrams/47.svg',
+  symbol: '/hexagrams/47.svg',
   hexagramOriginal: '困：亨。贞，大人吉，无咎。有言不信。',
   tuanZhuan: '彖曰：困，刚揜也。险以说，困而不失其所亨，其唯君子乎！贞大人吉，以刚中也。有言不信，尚口乃穷也。',
   daXiangZhuan: '象曰：泽无水，困。君子以致命遂志。',

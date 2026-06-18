@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '水泽节',
   subtitle: '泽上有水君子以制数度，议德行',
-  symbol: '/diamond-sutra/hexagrams/60.svg',
+  symbol: '/hexagrams/60.svg',
   hexagramOriginal: '节：亨。苦节不可贞。',
   tuanZhuan: '彖曰：节亨，刚柔分而刚得中。苦节不可贞，其道穷也。说以行险，当位以节，中正以通。天地节而四时成。节以制度，不伤财，不害民。',
   daXiangZhuan: '象曰：泽上有水，节。君子以制数度，议德行。',

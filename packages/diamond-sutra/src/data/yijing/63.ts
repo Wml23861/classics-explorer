@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '水火既济',
   subtitle: '水在火上君子以思患而预防之',
-  symbol: '/diamond-sutra/hexagrams/63.svg',
+  symbol: '/hexagrams/63.svg',
   hexagramOriginal: '既济：亨小，利贞。初吉终乱。',
   tuanZhuan: '彖曰：既济亨，小者亨也。利贞，刚柔正而位当也。初吉，柔得中也。终止则乱，其道穷也。',
   daXiangZhuan: '象曰：水在火上，既济。君子以思患而预防之。',

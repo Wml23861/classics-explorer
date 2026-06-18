@@ -189,4 +189,60 @@ export interface Hexagram {
   modernMasters?: string
   /** 创作者说 */
   creatorNote?: string
+  /** 情关参究 — 以本卦智慧参究情关 */
+  heartBarrier?: YijingHeartBarrier
+  /** 她心即天心 — 帮她找回安全感、觉察自己、做自己 */
+  herHeart?: YijingHerHeart
+}
+
+// === 情关参究与她心即天心（易经专用） ===
+
+/** 情关参究（易经版） — 以本卦易理参究亲密关系中的情执与觉醒 */
+export interface YijingHeartBarrier {
+  /** 临观 — 临事观情，面对她的沉默先观后动 */
+  trigger: string
+  /** 玩辞 — 以卦辞爻辞为镜，参究情关 */
+  analysis: string
+  /** 比应 — 看她与你的爻位是否相应 */
+  understandHer: string
+  /** 省身 — 观照自己的执着与惧怕 */
+  observeSelf: string
+  /** 中正 — 不偏不倚的平衡 */
+  middleWay: string
+  /** 洗心 — 以卦象为身体地图的练习 */
+  practice: string
+  /** 贞一 — 一句不易的心法 */
+  heartMantra: string
+  /** 时行 — 今日当行之事 */
+  dailyAction: string
+  /** 无咎 — 此刻绝不能犯的错 */
+  forbidden: string
+  /** 复归 — 当她回来时，如何迎接 */
+  treatHer: string
+}
+
+/** 她心即天心 — 帮她找回安全感、觉察自己、做自己 */
+export interface YijingHerHeart {
+  /** 潜龙 — 她在谷底暂不现身的力量 */
+  safeCorner: string
+  /** 观象 — 以卦象照见她的内心 */
+  waterMirror: string
+  /** 他爻 — 他在她的卦中是什么位置 */
+  hisEyes: string
+  /** 深藏 — 她独处时如坤卦般深藏 */
+  herLake: string
+  /** 往来 — 进退都是自然的通达 */
+  twoShores: string
+  /** 翕辟 — 极简呼吸如坤卦开合 */
+  oneBreath: string
+  /** 巽风 — 说了就飘走的温柔话（可发） */
+  breeze: string
+  /** 默成 — 心中默念的祝福 */
+  breezeSilent: string
+  /** 咸感 — 你如何以柔感而应之 */
+  yourHands: string
+  /** 不伐 — 绝不可越过的边界 */
+  thunderPool: string
+  /** 兑言 — 她回来时的喜悦迎接 */
+  returnLight: string
 }

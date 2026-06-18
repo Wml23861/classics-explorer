@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '泽天夬',
   subtitle: '扬于王庭夬决果断，孚号有厉',
-  symbol: '/diamond-sutra/hexagrams/43.svg',
+  symbol: '/hexagrams/43.svg',
   hexagramOriginal:
     '夬：扬于王庭，孚号有厉。告自邑，不利即戎，利有攸往。',
   tuanZhuan:

@@ -59,8 +59,14 @@ const grouped = computed(() => {
             : { background: 'transparent', color: '#8a7a60', border: '1px solid rgba(180,130,30,0.2)' }">
           金刚经 · 三十二品
         </router-link>
+        <router-link to="/yijing" class="px-5 py-2 rounded-full text-sm tracking-[0.1em] no-underline transition-all duration-300"
+          :style="isYijing
+            ? { background: '#8b4513', color: '#fff' }
+            : { background: 'transparent', color: '#8a7a60', border: '1px solid rgba(139,69,19,0.2)' }">
+          易经 · 六十四卦
+        </router-link>
         <router-link to="/tao" class="px-5 py-2 rounded-full text-sm tracking-[0.1em] no-underline transition-all duration-300"
-          :style="!isDiamond
+          :style="isTaoist
             ? { background: '#2d6a4a', color: '#fff' }
             : { background: 'transparent', color: '#8a7a60', border: '1px solid rgba(45,106,74,0.2)' }">
           道德经 · 八十一章

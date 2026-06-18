@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '雷水解',
   subtitle: '雷雨作解脱离危险，赦过宥罪',
-  symbol: '/diamond-sutra/hexagrams/40.svg',
+  symbol: '/hexagrams/40.svg',
   hexagramOriginal:
     '解：利西南。无所往，其来复吉。有攸往，夙吉。',
   tuanZhuan:

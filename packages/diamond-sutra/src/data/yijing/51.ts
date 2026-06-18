@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '震为雷',
   subtitle: '洊雷君子以恐惧修省',
-  symbol: '/diamond-sutra/hexagrams/51.svg',
+  symbol: '/hexagrams/51.svg',
   hexagramOriginal: '震：亨。震来虩虩，笑言哑哑。震惊百里，不丧匕鬯。',
   tuanZhuan: '彖曰：震亨。震来虩虩，恐致福也。笑言哑哑，后有则也。震惊百里，惊远而惧迩也。出可以守宗庙社稷，以为祭主也。',
   daXiangZhuan: '象曰：洊雷，震。君子以恐惧修省。',

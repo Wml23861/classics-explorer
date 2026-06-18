@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '山天大畜',
   subtitle: '利贞，不家食吉，利涉大川厚积薄发，畜德养贤',
-  symbol: '/diamond-sutra/hexagrams/26.svg',
+  symbol: '/hexagrams/26.svg',
   hexagramOriginal:
     '大畜：利贞。不家食吉，利涉大川。',
   tuanZhuan:

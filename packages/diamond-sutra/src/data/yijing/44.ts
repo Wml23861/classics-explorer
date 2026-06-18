@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '天风姤',
   subtitle: '女壮勿取姤遇不期，品物咸章',
-  symbol: '/diamond-sutra/hexagrams/44.svg',
+  symbol: '/hexagrams/44.svg',
   hexagramOriginal:
     '姤：女壮，勿用取女。',
   tuanZhuan:

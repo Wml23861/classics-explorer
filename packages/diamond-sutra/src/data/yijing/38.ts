@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '火泽睽',
   subtitle: '二女同居睽而不同，求同存异',
-  symbol: '/diamond-sutra/hexagrams/38.svg',
+  symbol: '/hexagrams/38.svg',
   hexagramOriginal:
     '睽：小事吉。',
   tuanZhuan:

@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '兑为泽',
   subtitle: '兑亨利贞朋友讲习，以丽泽说',
-  symbol: '/diamond-sutra/hexagrams/58.svg',
+  symbol: '/hexagrams/58.svg',
   hexagramOriginal:
     '兑：亨，利贞。',
   tuanZhuan:

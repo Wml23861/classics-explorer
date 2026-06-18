@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '泽风大过',
   subtitle: '栋桡，利有攸往，亨大过非常，独立不惧',
-  symbol: '/diamond-sutra/hexagrams/28.svg',
+  symbol: '/hexagrams/28.svg',
   hexagramOriginal:
     '大过：栋桡。利有攸往，亨。',
   tuanZhuan:

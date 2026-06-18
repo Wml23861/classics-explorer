@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '离为火',
   subtitle: '利贞亨重明丽正，化成天下',
-  symbol: '/diamond-sutra/hexagrams/30.svg',
+  symbol: '/hexagrams/30.svg',
   hexagramOriginal:
     '离：利贞，亨。畜牝牛吉。',
   tuanZhuan:

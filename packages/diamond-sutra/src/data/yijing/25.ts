@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '天雷无妄',
   subtitle: '无妄灾也天命不佑，顺其自然',
-  symbol: '/diamond-sutra/hexagrams/25.svg',
+  symbol: '/hexagrams/25.svg',
   hexagramOriginal:
     '无妄：元亨，利贞。其匪正有眚，不利有攸往。',
   tuanZhuan:

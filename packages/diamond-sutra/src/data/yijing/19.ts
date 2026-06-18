@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '地泽临',
   subtitle: '临下亲民刚浸而长，教思无穷',
-  symbol: '/diamond-sutra/hexagrams/19.svg',
+  symbol: '/hexagrams/19.svg',
   hexagramOriginal:
     '临：元亨利贞。至于八月有凶。',
   tuanZhuan:

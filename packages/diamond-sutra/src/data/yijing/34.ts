@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '雷天大壮',
   subtitle: '雷在天上君子以非礼弗履',
-  symbol: '/diamond-sutra/hexagrams/34.svg',
+  symbol: '/hexagrams/34.svg',
   hexagramOriginal: '大壮：利贞。',
   tuanZhuan: '彖曰：大壮，大者壮也。刚以动，故壮。大壮利贞，大者正也。正大而天地之情可见矣。',
   daXiangZhuan: '象曰：雷在天上，大壮。君子以非礼弗履。',

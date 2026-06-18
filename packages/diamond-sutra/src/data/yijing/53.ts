@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '风山渐',
   subtitle: '山上有木君子以居贤德善俗',
-  symbol: '/diamond-sutra/hexagrams/53.svg',
+  symbol: '/hexagrams/53.svg',
   hexagramOriginal: '渐：女归吉。利贞。',
   tuanZhuan: '彖曰：渐之进也，女归吉也。进得位，往有功也。进以正，可以正邦也。其位，刚得中也。止而巽，动不穷也。',
   daXiangZhuan: '象曰：山上有木，渐。君子以居贤德善俗。',

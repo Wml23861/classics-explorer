@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '山火贲',
   subtitle: '亨，小利有攸往贲饰文饰，美在其中',
-  symbol: '/diamond-sutra/hexagrams/22.svg',
+  symbol: '/hexagrams/22.svg',
   hexagramOriginal:
     '贲：亨。小利有攸往。',
   tuanZhuan:

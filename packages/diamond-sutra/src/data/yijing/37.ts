@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '风火家人',
   subtitle: '正家而天下定齐家之道，风化之源',
-  symbol: '/diamond-sutra/hexagrams/37.svg',
+  symbol: '/hexagrams/37.svg',
   hexagramOriginal:
     '家人：利女贞。',
   tuanZhuan:

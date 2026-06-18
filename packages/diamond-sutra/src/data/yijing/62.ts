@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '雷山小过',
   subtitle: '小过亨利贞小有过越，宜下不宜上',
-  symbol: '/diamond-sutra/hexagrams/62.svg',
+  symbol: '/hexagrams/62.svg',
   hexagramOriginal:
     '小过：亨，利贞。可小事，不可大事。飞鸟遗之音，不宜上，宜下，大吉。',
   tuanZhuan:

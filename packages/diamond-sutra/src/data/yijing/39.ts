@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '水山蹇',
   subtitle: '见险能止艰难险阻中的生存智慧',
-  symbol: '/diamond-sutra/hexagrams/39.svg',
+  symbol: '/hexagrams/39.svg',
   hexagramOriginal:
     '蹇：利西南，不利东北。利见大人，贞吉。',
   tuanZhuan:

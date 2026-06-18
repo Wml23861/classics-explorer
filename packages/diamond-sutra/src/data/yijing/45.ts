@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '泽地萃',
   subtitle: '亨，王假有庙萃聚荟萃，观其所聚',
-  symbol: '/diamond-sutra/hexagrams/45.svg',
+  symbol: '/hexagrams/45.svg',
   hexagramOriginal:
     '萃：亨。王假有庙，利见大人，亨，利贞。用大牲吉，利有攸往。',
   tuanZhuan:

@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '艮为山',
   subtitle: '兼山君子以思不出其位',
-  symbol: '/diamond-sutra/hexagrams/52.svg',
+  symbol: '/hexagrams/52.svg',
   hexagramOriginal: '艮：艮其背，不获其身。行其庭，不见其人。无咎。',
   tuanZhuan: '彖曰：艮，止也。时止则止，时行则行。动静不失其时，其道光明。艮其止，止其所也。上下敌应，不相与也。是以不获其身，行其庭不见其人，无咎也。',
   daXiangZhuan: '象曰：兼山，艮。君子以思不出其位。',

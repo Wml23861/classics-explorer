@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '火风鼎',
   subtitle: '木上有火君子以正位凝命',
-  symbol: '/diamond-sutra/hexagrams/50.svg',
+  symbol: '/hexagrams/50.svg',
   hexagramOriginal: '鼎：元吉，亨。',
   tuanZhuan: '彖曰：鼎，象也。以木巽火，亨饪也。圣人亨以享上帝，而大亨以养圣贤。巽而耳目聪明，柔进而上行，得中而应乎刚，是以元亨。',
   daXiangZhuan: '象曰：木上有火，鼎。君子以正位凝命。',

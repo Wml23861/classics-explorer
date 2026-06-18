@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '泽火革',
   subtitle: '泽中有火君子以治历明时',
-  symbol: '/diamond-sutra/hexagrams/49.svg',
+  symbol: '/hexagrams/49.svg',
   hexagramOriginal: '革：巳日乃孚。元亨，利贞，悔亡。',
   tuanZhuan: '彖曰：革，水火相息。二女同居，其志不相得，曰革。巳日乃孚，革而信之。文明以说，大亨以正。革而当，其悔乃亡。天地革而四时成。汤武革命，顺乎天而应乎人。革之时大矣哉！',
   daXiangZhuan: '象曰：泽中有火，革。君子以治历明时。',

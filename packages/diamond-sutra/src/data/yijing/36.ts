@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '地火明夷',
   subtitle: '明入地中君子以莅众，用晦而明',
-  symbol: '/diamond-sutra/hexagrams/36.svg',
+  symbol: '/hexagrams/36.svg',
   hexagramOriginal: '明夷：利艰贞。',
   tuanZhuan: '彖曰：明入地中，明夷。内文明而外柔顺，以蒙大难，文王以之。利艰贞，晦其明也。内难而能正其志，箕子以之。',
   daXiangZhuan: '象曰：明入地中，明夷。君子以莅众，用晦而明。',

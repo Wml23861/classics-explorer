@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '火水未济',
   subtitle: '未济亨小狐汔济事未成也，未来可期',
-  symbol: '/diamond-sutra/hexagrams/64.svg',
+  symbol: '/hexagrams/64.svg',
   hexagramOriginal:
     '未济：亨。小狐汔济，濡其尾，无攸利。',
   tuanZhuan:

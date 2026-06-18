@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '巽为风',
   subtitle: '小亨利有攸往柔顺谦逊，申命行事',
-  symbol: '/diamond-sutra/hexagrams/57.svg',
+  symbol: '/hexagrams/57.svg',
   hexagramOriginal: '巽：小亨，利有攸往，利见大人。',
   tuanZhuan: '彖曰：重巽以申命。刚巽乎中正而志行，柔皆顺乎刚。是以小亨，利有攸往，利见大人。',
   daXiangZhuan: '象曰：随风，巽。君子以申命行事。',

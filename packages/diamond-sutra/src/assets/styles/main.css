@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Noto Serif SC", "Source Han Serif SC", "STSong", "SimSun", serif;
+  --font-serif: "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", "Source Han Serif SC", serif;
   --font-mono: "SF Mono", "Cascadia Code", "Consolas", monospace;
 }
 

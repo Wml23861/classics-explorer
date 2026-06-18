@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '山风蛊',
   subtitle: '蛊坏而治拯弊治乱，振民育德',
-  symbol: '/diamond-sutra/hexagrams/18.svg',
+  symbol: '/hexagrams/18.svg',
   hexagramOriginal:
     '蛊：元亨，利涉大川。先甲三日，后甲三日。',
   tuanZhuan:

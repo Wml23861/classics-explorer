@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '坎为水',
   subtitle: '有孚维心亨习坎重险，水流不盈',
-  symbol: '/diamond-sutra/hexagrams/29.svg',
+  symbol: '/hexagrams/29.svg',
   hexagramOriginal:
     '习坎：有孚，维心亨，行有尚。',
   tuanZhuan:

@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '火雷噬嗑',
   subtitle: '亨，利用狱噬嗑咬合，刑罚断狱',
-  symbol: '/diamond-sutra/hexagrams/21.svg',
+  symbol: '/hexagrams/21.svg',
   hexagramOriginal:
     '噬嗑：亨。利用狱。',
   tuanZhuan:

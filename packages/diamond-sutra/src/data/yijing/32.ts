@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '雷风恒',
   subtitle: '恒久不已立不易方，夫妇恒道',
-  symbol: '/diamond-sutra/hexagrams/32.svg',
+  symbol: '/hexagrams/32.svg',
   hexagramOriginal:
     '恒：亨，无咎，利贞，利有攸往。',
   tuanZhuan:

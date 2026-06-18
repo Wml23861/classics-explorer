@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '地风升',
   subtitle: '地中生木君子以顺德，积小以高大',
-  symbol: '/diamond-sutra/hexagrams/46.svg',
+  symbol: '/hexagrams/46.svg',
   hexagramOriginal: '升：元亨。用见大人，勿恤。南征吉。',
   tuanZhuan: '彖曰：柔以时升，巽而顺，刚中而应，是以大亨。用见大人勿恤，有庆也。南征吉，志行也。',
   daXiangZhuan: '象曰：地中生木，升。君子以顺德，积小以高大。',

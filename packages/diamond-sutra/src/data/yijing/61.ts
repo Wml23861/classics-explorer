@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '风泽中孚',
   subtitle: '中孚豚鱼吉内心诚信，信及豚鱼',
-  symbol: '/diamond-sutra/hexagrams/61.svg',
+  symbol: '/hexagrams/61.svg',
   hexagramOriginal:
     '中孚：豚鱼吉，利涉大川，利贞。',
   tuanZhuan:

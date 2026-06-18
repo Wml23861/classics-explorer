@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '地雷复',
   subtitle: '一阳来复七日来复，天行也',
-  symbol: '/diamond-sutra/hexagrams/24.svg',
+  symbol: '/hexagrams/24.svg',
   hexagramOriginal:
     '复：亨。出入无疾，朋来无咎。反复其道，七日来复，利有攸往。',
   tuanZhuan:

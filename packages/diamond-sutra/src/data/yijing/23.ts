@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '山地剥',
   subtitle: '不利有攸往剥落衰颓，阴剥阳尽',
-  symbol: '/diamond-sutra/hexagrams/23.svg',
+  symbol: '/hexagrams/23.svg',
   hexagramOriginal:
     '剥：不利有攸往。',
   tuanZhuan:

@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '山雷颐',
   subtitle: '贞吉，观颐，自求口实颐养之道，养正养身',
-  symbol: '/diamond-sutra/hexagrams/27.svg',
+  symbol: '/hexagrams/27.svg',
   hexagramOriginal:
     '颐：贞吉。观颐，自求口实。',
   tuanZhuan:

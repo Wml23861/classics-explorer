@@ -181,7 +181,7 @@ const yijingDimSources = [
     <div class="reading-bar" :style="{ width: bar + '%' }" />
 
     <!-- FLOATING NAV DOTS -->
-    <div class="fixed top-20 right-3 sm:right-5 z-40 flex flex-col gap-2 zen-hide">
+    <div class="fixed top-20 right-3 sm:right-5 z-40 hidden sm:flex flex-col gap-2 zen-hide">
       <button @click="toggleZen"
         class="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer border-0"
         :style="zen ? { background: '#8b6914', color: '#fff' } : { background: '#fefcf7', color: '#8a7a60', border: '1px solid rgba(180,150,100,0.25)' }"
@@ -257,7 +257,7 @@ const yijingDimSources = [
         </div>
         <!-- 易经卦图 -->
         <div v-if="isYijing && chapter.symbol" class="flex justify-center mb-6">
-          <img :src="chapter.symbol" :alt="chapter.title" style="max-width:180px;" class="rounded-lg" />
+          <img :src="chapter.symbol" :alt="chapter.title" style="max-width:180px;width:100%;" class="rounded-lg" />
         </div>
         <div class="sutra-text space-y-4">
           <p v-for="(para, pi) in originalText.split('\n').filter(Boolean)" :key="pi" style="text-indent: 2em; margin-bottom: 1.25rem;">{{ para }}</p>
@@ -559,6 +559,43 @@ const yijingDimSources = [
         <div v-else class="text-center py-8"><p class="text-base tracking-wider" style="color: #a09080;">此卦高维视角内容正在精心编撰中，敬请期待。</p></div>
       </section>
       <div class="gold-line" />
+
+      <!-- 6.5 情关参究（易经版） -->
+      <section v-if="isYijing && chapter.heartBarrier" id="heartBarrier" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(139,105,20,0.02) 50%, rgba(192,64,64,0.02) 100%);">
+        <div class="section-header"><div class="section-header-bar" style="background: linear-gradient(180deg, #8b6914, #c04040, #2d6a4a, #8b6914);" /><h2 class="section-header-title" style="color: #8b6914;">情 关 参 究</h2><span class="section-header-subtitle">临观 · 玩辞 · 比应 · 省身 · 中正 · 洗心 · 贞一 · 时行 · 无咎 · 复归</span><div class="section-header-line" style="background: linear-gradient(90deg, rgba(139,105,20,0.12), transparent);" /></div>
+        <div class="five-mirror-card" style="border-left: 4px solid #8b6914;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(139,105,20,0.1); color: #8b6914;">临</div><h3>临 观</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;font-style:italic;">{{ chapter.heartBarrier.trigger }}</p></div>
+        <div class="five-mirror-card" style="border-left: 4px solid #8b6914;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(139,105,20,0.1); color: #8b6914;">玩</div><h3>玩 辞</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.heartBarrier.analysis.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+        <div class="five-mirror-card" style="border-left: 4px solid #c04040;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(192,64,64,0.1); color: #c04040;">比</div><h3>比 应</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.heartBarrier.understandHer }}</p></div>
+        <div class="five-mirror-card" style="border-left: 4px solid #3058c0;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(48,88,192,0.1); color: #3058c0;">省</div><h3>省 身</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.heartBarrier.observeSelf }}</p></div>
+        <div class="five-mirror-card" style="border-left: 4px solid #6048a0;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(96,72,160,0.1); color: #6048a0;">中</div><h3>中 正</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.heartBarrier.middleWay }}</p></div>
+        <div class="five-mirror-card" style="border-left: 4px solid #2d6a4a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(45,106,74,0.1); color: #2d6a4a;">洗</div><h3>洗 心</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.heartBarrier.practice }}</p></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #8b6914;"><h3 style="font-size:1rem;font-weight:700;color:#8b6914;letter-spacing:0.1em;">贞 一 · 心 法</h3><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-style:italic;">{{ chapter.heartBarrier.heartMantra }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #c06030;"><h3 style="font-size:1rem;font-weight:700;color:#c06030;letter-spacing:0.1em;">时 行 · 行 动</h3><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;">{{ chapter.heartBarrier.dailyAction }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #8b0000;"><h3 style="font-size:1rem;font-weight:700;color:#8b0000;letter-spacing:0.1em;">无 咎 · 禁 行</h3><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-weight:600;">{{ chapter.heartBarrier.forbidden }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #b8860b;"><h3 style="font-size:1rem;font-weight:700;color:#b8860b;letter-spacing:0.1em;">复 归 · 待 她</h3><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;">{{ chapter.heartBarrier.treatHer }}</p></div>
+        </div>
+      </section>
+      <div v-if="isYijing && chapter.heartBarrier" class="gold-line" />
+
+      <!-- 6.6 她心即天心（易经版） -->
+      <section v-if="isYijing && chapter.herHeart" id="herHeart" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(139,105,20,0.02) 50%, rgba(45,106,74,0.02) 100%);">
+        <div class="section-header"><div class="section-header-bar" style="background: linear-gradient(180deg, #8b6914, #2d6a4a, #c04040, #8b6914);" /><h2 class="section-header-title" style="color: #8b6914;">她 心 即 天 心</h2><span class="section-header-subtitle">潜龙 · 观象 · 他爻 · 深藏 · 往来 · 翕辟 · 巽风 · 默成 · 咸感 · 不伐 · 兑言</span><div class="section-header-line" style="background: linear-gradient(90deg, rgba(139,105,20,0.12), transparent);" /></div>
+        <div class="five-mirror-card" style="border-left:4px solid #8b6914;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background:rgba(139,105,20,0.1);color:#8b6914;">潜</div><h3>潜 龙</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;font-style:italic;">{{ chapter.herHeart.safeCorner }}</p></div>
+        <div class="five-mirror-card" style="border-left:4px solid #2d6a4a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background:rgba(45,106,74,0.1);color:#2d6a4a;">观</div><h3>观 象</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.herHeart.waterMirror.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+        <div class="five-mirror-card" style="border-left:4px solid #3058c0;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background:rgba(48,88,192,0.1);color:#3058c0;">他</div><h3>他 爻</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.herHeart.hisEyes }}</p></div>
+        <div class="five-mirror-card" style="border-left:4px solid #6048a0;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background:rgba(96,72,160,0.1);color:#6048a0;">藏</div><h3>深 藏</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.herHeart.herLake.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+        <div class="five-mirror-card" style="border-left:4px solid #c04040;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background:rgba(192,64,64,0.1);color:#c04040;">往</div><h3>往 来</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.herHeart.twoShores }}</p></div>
+        <div class="five-mirror-card" style="border-left:4px solid #c06030;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background:rgba(192,96,48,0.1);color:#c06030;">翕</div><h3>翕 辟</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.herHeart.oneBreath }}</p></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #8b6914;"><h3 style="font-size:1rem;font-weight:700;color:#8b6914;">巽 风（可发）</h3><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-style:italic;">{{ chapter.herHeart.breeze }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #3a7a8a;"><h3 style="font-size:1rem;font-weight:700;color:#3a7a8a;">默 成（默念）</h3><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-style:italic;">{{ chapter.herHeart.breezeSilent }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #2d6a4a;"><h3 style="font-size:1rem;font-weight:700;color:#2d6a4a;">咸 感</h3><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;">{{ chapter.herHeart.yourHands }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #8b0000;"><h3 style="font-size:1rem;font-weight:700;color:#8b0000;">不 伐</h3><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-weight:600;">{{ chapter.herHeart.thunderPool }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #c06030;grid-column:1/-1;"><h3 style="font-size:1rem;font-weight:700;color:#c06030;">兑 言</h3><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;">{{ chapter.herHeart.returnLight }}</p></div>
+        </div>
+      </section>
+      <div v-if="isYijing && chapter.herHeart" class="gold-line" />
 
       <!-- 6.5 情关参究（道家版） -->
       <section v-if="isTaoist && chapter.taoHeartBarrier" id="heartBarrier" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(192,64,64,0.02) 50%, rgba(45,106,74,0.02) 100%);">

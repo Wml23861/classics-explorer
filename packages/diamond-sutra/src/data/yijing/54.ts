@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '雷泽归妹',
   subtitle: '泽上有雷君子以永终知敝',
-  symbol: '/diamond-sutra/hexagrams/54.svg',
+  symbol: '/hexagrams/54.svg',
   hexagramOriginal: '归妹：征凶，无攸利。',
   tuanZhuan: '彖曰：归妹，天地之大义也。天地不交而万物不兴。归妹，人之终始也。说以动，所归妹也。征凶，位不当也。无攸利，柔乘刚也。',
   daXiangZhuan: '象曰：泽上有雷，归妹。君子以永终知敝。',

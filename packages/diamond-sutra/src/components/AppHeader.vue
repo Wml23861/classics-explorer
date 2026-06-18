@@ -1,3 +1,9 @@
+<!--
+ * @Author: 王明龙
+ * @Date: 2026-06-12 14:54:06
+ * @LastEditTime: 2026-06-18 13:21:17
+ * @Description: 
+-->
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
@@ -12,6 +18,7 @@ function isActive(path: string) { return path === '/' ? route.path === '/' : rou
 const navItems = [
   { path: '/', label: '首页', icon: '家' },
   { path: '/diamond', label: '金刚经', icon: '般' },
+  { path: '/yijing', label: '易经', icon: '易' },
   { path: '/tao', label: '道德经', icon: '道' },
 ]
 </script>

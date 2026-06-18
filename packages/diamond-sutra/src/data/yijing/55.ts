@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '雷火丰',
   subtitle: '雷电皆至君子以折狱致刑',
-  symbol: '/diamond-sutra/hexagrams/55.svg',
+  symbol: '/hexagrams/55.svg',
   hexagramOriginal: '丰：亨。王假之，勿忧，宜日中。',
   tuanZhuan: '彖曰：丰，大也。明以动，故丰。王假之，尚大也。勿忧宜日中，宜照天下也。日中则昃，月盈则食。天地盈虚，与时消息。而况于人乎？况于鬼神乎？',
   daXiangZhuan: '象曰：雷电皆至，丰。君子以折狱致刑。',

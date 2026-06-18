@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '风雷益',
   subtitle: '益下损上利民利他，与时偕行',
-  symbol: '/diamond-sutra/hexagrams/42.svg',
+  symbol: '/hexagrams/42.svg',
   hexagramOriginal:
     '益：利有攸往，利涉大川。',
   tuanZhuan:

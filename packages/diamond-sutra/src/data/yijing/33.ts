@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '天山遯',
   subtitle: '天下有山君子以远小人，不恶而严',
-  symbol: '/diamond-sutra/hexagrams/33.svg',
+  symbol: '/hexagrams/33.svg',
   hexagramOriginal: '遯：亨，小利贞。',
   tuanZhuan: '彖曰：遯亨，遯而亨也。刚当位而应，与时行也。小利贞，浸而长也。遯之时义大矣哉！',
   daXiangZhuan: '象曰：天下有山，遯。君子以远小人，不恶而严。',

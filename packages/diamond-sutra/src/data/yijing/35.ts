@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '火地晋',
   subtitle: '晋进光明明出地上，自昭明德',
-  symbol: '/diamond-sutra/hexagrams/35.svg',
+  symbol: '/hexagrams/35.svg',
   hexagramOriginal:
     '晋：康侯用锡马蕃庶，昼日三接。',
   tuanZhuan:

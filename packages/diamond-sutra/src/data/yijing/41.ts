@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '山泽损',
   subtitle: '损下益上损己利人，损而有孚',
-  symbol: '/diamond-sutra/hexagrams/41.svg',
+  symbol: '/hexagrams/41.svg',
   hexagramOriginal:
     '损：有孚，元吉，无咎，可贞，利有攸往。曷之用？二簋可用享。',
   tuanZhuan:

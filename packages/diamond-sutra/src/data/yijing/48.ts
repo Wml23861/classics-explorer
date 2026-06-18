@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '水风井',
   subtitle: '木上有水君子以劳民劝相',
-  symbol: '/diamond-sutra/hexagrams/48.svg',
+  symbol: '/hexagrams/48.svg',
   hexagramOriginal: '井：改邑不改井，无丧无得，往来井井。汔至亦未繘井，羸其瓶，凶。',
   tuanZhuan: '彖曰：巽乎水而上水，井。井养而不穷也。改邑不改井，乃以刚中也。汔至亦未繘井，未有功也。羸其瓶，是以凶也。',
   daXiangZhuan: '象曰：木上有水，井。君子以劳民劝相。',

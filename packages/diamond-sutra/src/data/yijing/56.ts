@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '火山旅',
   subtitle: '旅贞吉客旅之道，柔中顺刚',
-  symbol: '/diamond-sutra/hexagrams/56.svg',
+  symbol: '/hexagrams/56.svg',
   hexagramOriginal:
     '旅：小亨，旅贞吉。',
   tuanZhuan:

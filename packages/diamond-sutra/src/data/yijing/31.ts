@@ -5,7 +5,7 @@ export default {
   sutraType: 'yijing',
   title: '泽山咸',
   subtitle: '感应亨通以虚受人，柔上而刚下',
-  symbol: '/diamond-sutra/hexagrams/31.svg',
+  symbol: '/hexagrams/31.svg',
   hexagramOriginal:
     '咸：亨，利贞，取女吉。',
   tuanZhuan:
