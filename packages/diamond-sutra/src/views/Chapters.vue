@@ -83,8 +83,34 @@ const grouped = computed(() => {
 
     <!-- Bento Grid of Chapters -->
     <section v-else class="pb-24 sm:pb-32 content-width">
+      <!-- 上经/下经 section headers for I Ching -->
+      <template v-if="isYijing">
+        <div v-if="data.filter(c => c.id <= 30).length > 0" class="mb-4 mt-4">
+          <h2 class="text-lg font-semibold tracking-[0.15em] px-1" style="color: #5a4020;">
+            <span class="w-6 h-[2px] inline-block align-middle mr-3" style="background: #8b4513;"></span>上 经
+            <span class="text-xs tracking-[0.15em] ml-2 opacity-60">第一卦 至 第三十卦</span>
+          </h2>
+        </div>
+        <div class="space-y-5 mb-10">
+          <div v-for="(group, gi) in grouped.filter(g => g[0].id <= 30)" :key="'upper-'+gi" class="bento-grid">
+            <ChapterCard v-for="chapter in group" :key="chapter.id" :chapter="chapter" :link-prefix="linkPrefix" :total="total" />
+          </div>
+        </div>
+        <div v-if="data.filter(c => c.id >= 31).length > 0" class="mb-4 mt-10">
+          <h2 class="text-lg font-semibold tracking-[0.15em] px-1" style="color: #5a4020;">
+            <span class="w-6 h-[2px] inline-block align-middle mr-3" style="background: #8b4513;"></span>下 经
+            <span class="text-xs tracking-[0.15em] ml-2 opacity-60">第三十一卦 至 第六十四卦</span>
+          </h2>
+        </div>
+        <div class="space-y-5">
+          <div v-for="(group, gi) in grouped.filter(g => g[0].id >= 31)" :key="'lower-'+gi" class="bento-grid">
+            <ChapterCard v-for="chapter in group" :key="chapter.id" :chapter="chapter" :link-prefix="linkPrefix" :total="total" />
+          </div>
+        </div>
+      </template>
+
       <!-- 道经/德经 section headers for Tao Te Ching -->
-      <template v-if="!isDiamond">
+      <template v-else-if="isTaoist">
         <div v-if="data.filter(c => c.id <= 37).length > 0" class="mb-4 mt-4">
           <h2 class="text-lg font-semibold tracking-[0.15em] px-1" style="color: #5a4020;">
             <span class="w-6 h-[2px] inline-block align-middle mr-3" style="background: #2d6a4a;"></span>道 经

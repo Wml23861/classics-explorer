@@ -108,6 +108,15 @@ export interface Chapter {
   taoHeartBarrier?: TaoHeartBarrierPractice
   /** 她心即道心 — 帮她找回安全感、觉察自己、做自己，以道养心 */
   taoHerHeart?: TaoHerHeartPractice
+
+  // === 家和圆照（金刚经专用） ===
+  /** 家和圆照 — 以本品般若智慧圆照全家，转挂碍为清明力量 */
+  familyHarmony?: FamilyHarmony
+
+  // === 家和若水（道德经专用） ===
+  /** 家和若水 — 以本章道门智慧若水润泽全家，柔反归安 */
+  taoFamilyHarmony?: JiaHeRuoShui
+
   /** 道门五镜 — 玄/虚/柔/反/自然 */
   taoistFiveMirrors?: TaoistFiveMirrors
   /** 六维分析 */
@@ -168,6 +177,94 @@ export interface HerHeartPractice {
   thunderPool: string
   /** 归灯 — 她回来了，你如何亮着一盏不追问不审判的灯 */
   returnLight: string
+}
+
+// === 家和圆照（金刚经专用） ===
+
+/** 照亲 — 以本品智慧照见每一位家人 */
+export interface FamilyReflection {
+  /** 父亲 */
+  father: string
+  /** 母亲 */
+  mother: string
+  /** 兄长 */
+  elderBrother: string
+  /** 弟弟 */
+  youngerBrother: string
+  /** 弟媳 */
+  sisterInLaw: string
+}
+
+/** 家和圆照 — 以本品般若智慧圆照全家，转挂碍为清明力量 */
+export interface FamilyHarmony {
+  /** 叩关 — 以本品经文一句切入家庭真实情境 */
+  trigger: string
+  /** 参究 — 以本品般若智慧深度参究家庭困结 */
+  analysis: string
+  /** 照亲 — 以本品智慧照见每一位家人 */
+  reflectFamily: FamilyReflection
+  /** 返观 — 觉察自己对家人的挂碍、执取与担忧 */
+  observeSelf: string
+  /** 转境 — 把对每个人的挂碍转化成清明力量 */
+  transformView: string
+  /** 中道 — 在关心与放下之间的平衡智慧 */
+  middleWay: string
+  /** 圆照 — 圆融照见全家整体图景 */
+  roundIllumination: string
+  /** 心法 — 烦恼涌上来时能用的短句 */
+  heartMantra: string
+  /** 日课 — 今天具体做什么 */
+  dailyAction: string
+  /** 禁行 — 此刻绝不做的事（戒律式棒喝） */
+  forbidden: string
+  /** 家灯 — 给全家留一句温柔的话 */
+  familyLight: string
+  /** 见己 — 以本品般若照见自己不自知的品质与力量 */
+  seeSelf: string
+}
+
+// === 家和若水（道德经专用） ===
+
+/** 鉴水 — 以水为镜照见每一位家人 */
+export interface TaoFamilyReflection {
+  /** 父亲 */
+  father: string
+  /** 母亲 */
+  mother: string
+  /** 兄长 */
+  elderBrother: string
+  /** 弟弟 */
+  youngerBrother: string
+  /** 弟媳 */
+  sisterInLaw: string
+}
+
+/** 家和若水 — 以本章道门智慧若水润泽全家，柔反归安 */
+export interface JiaHeRuoShui {
+  /** 叩关 — 以本章经文一句切入家庭真实情境 */
+  trigger: string
+  /** 观复 — 以本章道门智慧观照家庭循环往复 */
+  contemplateReturn: string
+  /** 鉴水 — 以水为镜照见每一位家人 */
+  mirrorWater: TaoFamilyReflection
+  /** 自知 — 觉察自己对家人的挂碍与执取 */
+  knowSelf: string
+  /** 反用 — 以反者道之动转挂碍为清明力量 */
+  reverseApplication: string
+  /** 守中 — 在关心与放下之间的虚静平衡 */
+  guardCenter: string
+  /** 玄同 — 超越分别圆融照见全家整体 */
+  mysteriousUnity: string
+  /** 得一 — 烦恼涌上来时能用的道枢之言 */
+  holdOne: string
+  /** 执古 — 今日以道御事的具体行动 */
+  followAncient: string
+  /** 守柔 — 此刻绝不做的事（守柔曰强） */
+  guardSoftness: string
+  /** 归根 — 给全家留一句温柔的话，如万物归根 */
+  returnRoot: string
+  /** 明己 — 以本章道门智慧照见自己不自知的品质与力量 */
+  illuminateSelf: string
 }
 
 // === 道德经专用类型 ===

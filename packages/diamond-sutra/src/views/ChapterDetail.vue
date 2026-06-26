@@ -30,7 +30,7 @@ onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 const sect = ref('')
-const ids = ['original', 'essence', 'fiveMirrors', 'scenarios', 'rushidao', 'fourFold', 'celebrity', 'classics', 'higher', 'heartBarrier', 'herHeart', 'wangYangming', 'huineng', 'modernMasters', 'relationships', 'insights', 'modern', 'meditation', 'energy', 'questions', 'creator']
+const ids = ['original', 'essence', 'fiveMirrors', 'scenarios', 'rushidao', 'fourFold', 'celebrity', 'classics', 'higher', 'heartBarrier', 'herHeart', 'familyHarmony', 'taoFamilyHarmony', 'yijingFamilyHarmony', 'wangYangming', 'huineng', 'modernMasters', 'relationships', 'insights', 'modern', 'meditation', 'energy', 'questions', 'creator']
 function spy() { for (const id of [...ids].reverse()) { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top <= 160) { sect.value = id; break } } }
 onMounted(() => window.addEventListener('scroll', spy, { passive: true }))
 onUnmounted(() => window.removeEventListener('scroll', spy))
@@ -64,6 +64,16 @@ const time = computed(() => {
     c.meditationGuide ?? '', c.energyPractice ?? '', c.awakeningInsight ?? '', c.creatorNote ?? '',
     c.celebrityAnalysis?.foreignAncient ?? '', c.celebrityAnalysis?.foreignModern ?? '',
     c.celebrityAnalysis?.chineseAncient ?? '', c.celebrityAnalysis?.chineseModern ?? '',
+    // familyHarmony
+    c.familyHarmony?.trigger ?? '', c.familyHarmony?.analysis ?? '',
+    c.familyHarmony?.reflectFamily?.father ?? '', c.familyHarmony?.reflectFamily?.mother ?? '',
+    c.familyHarmony?.reflectFamily?.elderBrother ?? '', c.familyHarmony?.reflectFamily?.youngerBrother ?? '',
+    c.familyHarmony?.reflectFamily?.sisterInLaw ?? '',
+    c.familyHarmony?.observeSelf ?? '', c.familyHarmony?.transformView ?? '',
+    c.familyHarmony?.middleWay ?? '', c.familyHarmony?.roundIllumination ?? '',
+    c.familyHarmony?.heartMantra ?? '', c.familyHarmony?.dailyAction ?? '',
+    c.familyHarmony?.forbidden ?? '', c.familyHarmony?.familyLight ?? '',
+    c.familyHarmony?.seeSelf ?? '',
   ]
   if (isDiamond.value) {
     t.push(
@@ -96,6 +106,16 @@ const time = computed(() => {
       c.taoistFiveMirrors?.return ?? '', c.taoistFiveMirrors?.spontaneity ?? '',
       c.sixFoldAnalysis?.yiJing ?? '', c.sixFoldAnalysis?.zhuangZi ?? '', c.sixFoldAnalysis?.maoZeDong ?? '',
       c.sixFoldAnalysis?.confucian ?? '', c.sixFoldAnalysis?.chanZong ?? '', c.sixFoldAnalysis?.westernPhilosophy ?? '',
+      // taoFamilyHarmony
+      c.taoFamilyHarmony?.trigger ?? '', c.taoFamilyHarmony?.contemplateReturn ?? '',
+      c.taoFamilyHarmony?.mirrorWater?.father ?? '', c.taoFamilyHarmony?.mirrorWater?.mother ?? '',
+      c.taoFamilyHarmony?.mirrorWater?.elderBrother ?? '', c.taoFamilyHarmony?.mirrorWater?.youngerBrother ?? '',
+      c.taoFamilyHarmony?.mirrorWater?.sisterInLaw ?? '',
+      c.taoFamilyHarmony?.knowSelf ?? '', c.taoFamilyHarmony?.reverseApplication ?? '',
+      c.taoFamilyHarmony?.guardCenter ?? '', c.taoFamilyHarmony?.mysteriousUnity ?? '',
+      c.taoFamilyHarmony?.holdOne ?? '', c.taoFamilyHarmony?.followAncient ?? '',
+      c.taoFamilyHarmony?.guardSoftness ?? '', c.taoFamilyHarmony?.returnRoot ?? '',
+      c.taoFamilyHarmony?.illuminateSelf ?? '',
     )
   }
   return `约 ${Math.ceil(t.join('').length / 450)} 分钟阅读`
@@ -121,13 +141,13 @@ function copy(t: string, id: string) { navigator.clipboard.writeText(t); copied.
 
 const sectionLabels: Record<string, string> = {
   original: '原文', essence: '要义', overview: '卦象', fiveMirrors: '五镜', scenarios: '场景', rushidao: '汇通',
-  fourFold: '四维', celebrity: '名人', classics: '融通', higher: '高维', heartBarrier: '情关', herHeart: '她心', wangYangming: '心学', huineng: '六祖',
+  fourFold: '四维', celebrity: '名人', classics: '融通', higher: '高维', heartBarrier: '情关', herHeart: '她心', familyHarmony: '家和', taoFamilyHarmony: '若水', yijingFamilyHarmony: '易通', wangYangming: '心学', huineng: '六祖',
   modernMasters: '法师', relationships: '人伦', insights: '感悟', modern: '现代',
   meditation: '冥想', energy: '能量', questions: '问答', creator: '创作者',
 }
 const sectionChars: Record<string, string> = {
   original: '原', essence: '义', overview: '象', fiveMirrors: '镜', scenarios: '境', rushidao: '通',
-  fourFold: '四', celebrity: '名', classics: '融', higher: '维', heartBarrier: '情', herHeart: '她', wangYangming: '王', huineng: '慧',
+  fourFold: '四', celebrity: '名', classics: '融', higher: '维', heartBarrier: '情', herHeart: '她', familyHarmony: '家', taoFamilyHarmony: '水', yijingFamilyHarmony: '易', wangYangming: '王', huineng: '慧',
   modernMasters: '师', relationships: '伦', insights: '悟', modern: '行',
   meditation: '静', energy: '能', questions: '问', creator: '明',
 }
@@ -597,6 +617,50 @@ const yijingDimSources = [
       </section>
       <div v-if="isYijing && chapter.herHeart" class="gold-line" />
 
+      <!-- 9.8 家和易通 — 以本卦变通智慧观照全家 -->
+      <section v-if="isYijing && chapter.yijingFamilyHarmony" id="yijingFamilyHarmony" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(139,69,19,0.02) 50%, rgba(184,134,11,0.02) 100%);">
+        <div class="section-header">
+          <div class="section-header-bar" style="background: linear-gradient(180deg, #8b4513, #b8860b, #8b6914, #8b4513);" />
+          <h2 class="section-header-title" style="color: #8b4513;">家 和 易 通</h2>
+          <span class="section-header-subtitle">叩关 · 观彖 · 照爻 · 省身 · 通变 · 中正 · 大象 · 贞一 · 时行 · 无咎 · 明夷 · 见龙</span>
+          <div class="section-header-line" style="background: linear-gradient(90deg, rgba(139,69,19,0.12), transparent);" />
+        </div>
+
+        <!-- 叩关 -->
+        <div class="five-mirror-card" style="border-left: 4px solid #8b4513;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(139,69,19,0.1); color: #8b4513;">叩</div><h3>叩 关</h3></div><p style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20; padding-left: 0.25rem; font-style: italic;">{{ chapter.yijingFamilyHarmony.trigger }}</p></div>
+
+        <!-- 观彖 -->
+        <div class="five-mirror-card" style="border-left: 4px solid #b8860b;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(184,134,11,0.1); color: #b8860b;">彖</div><h3>观 彖</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.yijingFamilyHarmony.contemplateTuan.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+
+        <!-- 照爻 — 5位家人 -->
+        <div class="space-y-5 mt-5">
+          <div class="five-mirror-card" style="border-left: 4px solid #8b4513;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(139,69,19,0.1); color: #8b4513;">爻</div><h3>照 爻 · 父亲</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.yijingFamilyHarmony.reflectLines.father }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #b8860b;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(184,134,11,0.1); color: #b8860b;">爻</div><h3>照 爻 · 母亲</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.yijingFamilyHarmony.reflectLines.mother }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #8b6914;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(139,105,20,0.1); color: #8b6914;">爻</div><h3>照 爻 · 兄长</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.yijingFamilyHarmony.reflectLines.elderBrother }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #c06030;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(192,96,48,0.1); color: #c06030;">爻</div><h3>照 爻 · 弟弟</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.yijingFamilyHarmony.reflectLines.youngerBrother }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #6048a0;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(96,72,160,0.1); color: #6048a0;">爻</div><h3>照 爻 · 弟媳</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.yijingFamilyHarmony.reflectLines.sisterInLaw }}</p></div>
+        </div>
+
+        <div class="space-y-5 mt-5">
+          <!-- 省身 --><div class="five-mirror-card" style="border-left: 4px solid #8b0000;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(139,0,0,0.1); color: #8b0000;">省</div><h3>省 身</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.yijingFamilyHarmony.examineSelf.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+          <!-- 通变 --><div class="five-mirror-card" style="border-left: 4px solid #2d6a4a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(45,106,74,0.1); color: #2d6a4a;">变</div><h3>通 变</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.yijingFamilyHarmony.adaptChange.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+          <!-- 中正 --><div class="five-mirror-card" style="border-left: 4px solid #6048a0;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(96,72,160,0.1); color: #6048a0;">中</div><h3>中 正</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.yijingFamilyHarmony.centralRight }}</p></div>
+          <!-- 大象 --><div class="five-mirror-card" style="border-left: 4px solid #8b6914;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(139,105,20,0.1); color: #8b6914;">象</div><h3>大 象</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.yijingFamilyHarmony.greatImage.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+        </div>
+
+        <!-- 四卡片grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #8b4513;"><div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x2728;</span><h3 style="font-size:1rem;font-weight:700;color:#8b4513;">贞 一</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-style:italic;">{{ chapter.yijingFamilyHarmony.holdPurity }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #2d6a4a;"><div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x23F3;</span><h3 style="font-size:1rem;font-weight:700;color:#2d6a4a;">时 行</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;">{{ chapter.yijingFamilyHarmony.timelyAction }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #8b0000;"><div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x26D4;</span><h3 style="font-size:1rem;font-weight:700;color:#8b0000;">无 咎</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-weight:600;">{{ chapter.yijingFamilyHarmony.noBlame }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #c06030;grid-column: 1 / -1;"><div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x1F31E;</span><h3 style="font-size:1rem;font-weight:700;color:#c06030;">明 夷</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;">{{ chapter.yijingFamilyHarmony.mingYi }}</p></div>
+        </div>
+
+        <!-- 见龙 -->
+        <div class="five-mirror-card mt-5" style="border-left: 4px solid #8b4513;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(139,69,19,0.1); color: #8b4513;">龙</div><h3>见 龙</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.yijingFamilyHarmony.seeDragon.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p></div></div>
+      </section>
+      <div v-if="isYijing && chapter.yijingFamilyHarmony" class="gold-line" />
+
       <!-- 6.5 情关参究（道家版） -->
       <section v-if="isTaoist && chapter.taoHeartBarrier" id="heartBarrier" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(192,64,64,0.02) 50%, rgba(45,106,74,0.02) 100%);">
         <div class="section-header">
@@ -645,6 +709,71 @@ const yijingDimSources = [
         </div>
       </section>
       <div v-if="isTaoist && chapter.taoHerHeart" class="gold-line" />
+
+      <!-- 9.9 家和若水 — 以本章道门智慧若水润泽全家，柔反归安 -->
+      <section v-if="isTaoist && chapter.taoFamilyHarmony" id="taoFamilyHarmony" class="section-paper" style="background: linear-gradient(135deg, #f6faf7 0%, rgba(45,106,74,0.02) 50%, rgba(58,122,138,0.02) 100%);">
+        <div class="section-header">
+          <div class="section-header-bar" style="background: linear-gradient(180deg, #2d6a4a, #3a7a8a, #1a4a2a, #2d6a4a);" />
+          <h2 class="section-header-title" style="color: #2d6a4a;">家 和 若 水</h2>
+          <span class="section-header-subtitle">叩关 · 观复 · 鉴水 · 自知 · 反用 · 守中 · 玄同 · 得一 · 执古 · 守柔 · 归根 · 明己</span>
+          <div class="section-header-line" style="background: linear-gradient(90deg, rgba(45,106,74,0.12), transparent);" />
+        </div>
+
+        <!-- 叩关 -->
+        <div class="five-mirror-card" style="border-left: 4px solid #2d6a4a;">
+          <div class="five-mirror-header">
+            <div class="five-mirror-icon" style="background: rgba(45,106,74,0.1); color: #2d6a4a;">叩</div>
+            <h3>叩 关</h3>
+          </div>
+          <p style="font-size: var(--text-body-sm); line-height: 2; color: #3a4a20; padding-left: 0.25rem; font-style: italic;">{{ chapter.taoFamilyHarmony.trigger }}</p>
+        </div>
+
+        <!-- 观复 -->
+        <div class="five-mirror-card" style="border-left: 4px solid #3a7a8a;">
+          <div class="five-mirror-header">
+            <div class="five-mirror-icon" style="background: rgba(58,122,138,0.1); color: #3a7a8a;">观</div>
+            <h3>观 复</h3>
+          </div>
+          <div class="sutra-text space-y-3" style="padding-left:0.25rem;">
+            <p v-for="(para,pi) in chapter.taoFamilyHarmony.contemplateReturn.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#3a4a20;">{{ para }}</p>
+          </div>
+        </div>
+
+        <!-- 鉴水 — 五位家人 -->
+        <div class="space-y-5 mt-5">
+          <div class="five-mirror-card" style="border-left: 4px solid #1a5a3a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(26,90,58,0.1); color: #1a5a3a;">父</div><h3>鉴 水 · 父亲</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#3a4a20;padding-left:0.25rem;">{{ chapter.taoFamilyHarmony.mirrorWater.father }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #2d6a4a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(45,106,74,0.1); color: #2d6a4a;">母</div><h3>鉴 水 · 母亲</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#3a4a20;padding-left:0.25rem;">{{ chapter.taoFamilyHarmony.mirrorWater.mother }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #2d5a5a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(45,90,90,0.1); color: #2d5a5a;">兄</div><h3>鉴 水 · 兄长</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#3a4a20;padding-left:0.25rem;">{{ chapter.taoFamilyHarmony.mirrorWater.elderBrother }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #4a7a3a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(74,122,58,0.1); color: #4a7a3a;">弟</div><h3>鉴 水 · 弟弟</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#3a4a20;padding-left:0.25rem;">{{ chapter.taoFamilyHarmony.mirrorWater.youngerBrother }}</p></div>
+          <div class="five-mirror-card" style="border-left: 4px solid #5a8a6a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(90,138,106,0.1); color: #5a8a6a;">媳</div><h3>鉴 水 · 弟媳</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#3a4a20;padding-left:0.25rem;">{{ chapter.taoFamilyHarmony.mirrorWater.sisterInLaw }}</p></div>
+        </div>
+
+        <div class="space-y-5 mt-5">
+          <!-- 自知 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #6a3a2a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(106,58,42,0.1); color: #6a3a2a;">知</div><h3>自 知</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.taoFamilyHarmony.knowSelf.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#3a4a20;">{{ para }}</p></div></div>
+          <!-- 反用 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #2d6a6a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(45,106,106,0.1); color: #2d6a6a;">反</div><h3>反 用</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.taoFamilyHarmony.reverseApplication.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#3a4a20;">{{ para }}</p></div></div>
+          <!-- 守中 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #3a5a6a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(58,90,106,0.1); color: #3a5a6a;">中</div><h3>守 中</h3></div><p style="font-size:var(--text-body-sm);line-height:2;color:#3a4a20;padding-left:0.25rem;">{{ chapter.taoFamilyHarmony.guardCenter }}</p></div>
+          <!-- 玄同 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #1a4a3a;"><div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(26,74,58,0.1); color: #1a4a3a;">玄</div><h3>玄 同</h3></div><div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.taoFamilyHarmony.mysteriousUnity.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#3a4a20;">{{ para }}</p></div></div>
+        </div>
+
+        <!-- 四卡片grid：得一 / 执古 / 守柔 / 归根 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #2d6a4a;"><div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x2734;</span><h3 style="font-size:1rem;font-weight:700;color:#2d6a4a;">得 一</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#3a4a20;font-style:italic;">{{ chapter.taoFamilyHarmony.holdOne }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #3a7a3a;"><div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x1F333;</span><h3 style="font-size:1rem;font-weight:700;color:#3a7a3a;">执 古</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#3a4a20;">{{ chapter.taoFamilyHarmony.followAncient }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #5a3a2a;"><div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x1F4A7;</span><h3 style="font-size:1rem;font-weight:700;color:#5a3a2a;">守 柔</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#3a4a20;font-weight:600;">{{ chapter.taoFamilyHarmony.guardSoftness }}</p></div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #1a5a3a;grid-column: 1 / -1;"><div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x1F331;</span><h3 style="font-size:1rem;font-weight:700;color:#1a5a3a;">归 根</h3></div><p style="font-size:var(--text-body-sm);line-height:1.9;color:#3a4a20;">{{ chapter.taoFamilyHarmony.returnRoot }}</p></div>
+        </div>
+
+        <!-- 明己 -->
+        <div class="five-mirror-card mt-5" style="border-left: 4px solid #2d6a4a;">
+          <div class="five-mirror-header"><div class="five-mirror-icon" style="background: rgba(45,106,74,0.1); color: #2d6a4a;">明</div><h3>明 己</h3></div>
+          <div class="sutra-text space-y-3" style="padding-left:0.25rem;"><p v-for="(para,pi) in chapter.taoFamilyHarmony.illuminateSelf.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#3a4a20;">{{ para }}</p></div>
+        </div>
+      </section>
+      <div v-if="isTaoist && chapter.taoFamilyHarmony" class="gold-line" />
 
       <!-- 7. 王阳明心学 -->
       <section v-if="chapter.wangYangming" id="wangYangming" class="section-paper">
@@ -820,6 +949,156 @@ const yijingDimSources = [
         </div>
       </section>
       <div v-if="chapter.herHeart" class="gold-line" />
+
+      <!-- 9.9 家和圆照 — 以本品般若智慧圆照全家，转挂碍为清明力量 -->
+      <section v-if="chapter.familyHarmony" id="familyHarmony" class="section-paper" style="background: linear-gradient(135deg, #fefcf7 0%, rgba(45,74,90,0.02) 50%, rgba(139,105,20,0.02) 100%);">
+        <div class="section-header">
+          <div class="section-header-bar" style="background: linear-gradient(180deg, #2d4a5a, #5a3a1a, #8b6914, #2d4a5a);" />
+          <h2 class="section-header-title" style="color: #5a3a1a;">家 和 圆 照</h2>
+          <span class="section-header-subtitle">叩关 · 参究 · 照亲 · 返观 · 转境 · 中道 · 圆照 · 心法 · 日课 · 禁行 · 家灯 · 见己</span>
+          <div class="section-header-line" style="background: linear-gradient(90deg, rgba(90,58,26,0.12), transparent);" />
+        </div>
+
+        <!-- 叩关 -->
+        <div class="five-mirror-card" style="border-left: 4px solid #5a3a1a;">
+          <div class="five-mirror-header">
+            <div class="five-mirror-icon" style="background: rgba(90,58,26,0.1); color: #5a3a1a;">叩</div>
+            <h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #5a3a1a;">叩 关</h3>
+          </div>
+          <p style="font-size: var(--text-body-sm); line-height: 2; color: #4a3a20; padding-left: 0.25rem; font-style: italic;">{{ chapter.familyHarmony.trigger }}</p>
+        </div>
+
+        <!-- 参究 -->
+        <div class="five-mirror-card" style="border-left: 4px solid #2d4a5a;">
+          <div class="five-mirror-header">
+            <div class="five-mirror-icon" style="background: rgba(45,74,90,0.1); color: #2d4a5a;">参</div>
+            <h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #2d4a5a;">参 究</h3>
+          </div>
+          <div class="sutra-text space-y-3" style="padding-left:0.25rem;">
+            <p v-for="(para,pi) in chapter.familyHarmony.analysis.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p>
+          </div>
+        </div>
+
+        <!-- 照亲 — 五位家人 -->
+        <div class="space-y-5 mt-5">
+          <!-- 父 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #3a5a7a;">
+            <div class="five-mirror-header">
+              <div class="five-mirror-icon" style="background: rgba(58,90,122,0.1); color: #3a5a7a;">父</div>
+              <h3 style="font-size: 1.1rem; font-weight: 700; letter-spacing: 0.15em; color: #3a5a7a;">照 亲 · 父亲</h3>
+            </div>
+            <p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.familyHarmony.reflectFamily.father }}</p>
+          </div>
+          <!-- 母 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #8b6914;">
+            <div class="five-mirror-header">
+              <div class="five-mirror-icon" style="background: rgba(139,105,20,0.1); color: #8b6914;">母</div>
+              <h3 style="font-size: 1.1rem; font-weight: 700; letter-spacing: 0.15em; color: #8b6914;">照 亲 · 母亲</h3>
+            </div>
+            <p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.familyHarmony.reflectFamily.mother }}</p>
+          </div>
+          <!-- 兄 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #6048a0;">
+            <div class="five-mirror-header">
+              <div class="five-mirror-icon" style="background: rgba(96,72,160,0.1); color: #6048a0;">兄</div>
+              <h3 style="font-size: 1.1rem; font-weight: 700; letter-spacing: 0.15em; color: #6048a0;">照 亲 · 兄长</h3>
+            </div>
+            <p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.familyHarmony.reflectFamily.elderBrother }}</p>
+          </div>
+          <!-- 弟 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #c06030;">
+            <div class="five-mirror-header">
+              <div class="five-mirror-icon" style="background: rgba(192,96,48,0.1); color: #c06030;">弟</div>
+              <h3 style="font-size: 1.1rem; font-weight: 700; letter-spacing: 0.15em; color: #c06030;">照 亲 · 弟弟</h3>
+            </div>
+            <p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.familyHarmony.reflectFamily.youngerBrother }}</p>
+          </div>
+          <!-- 弟媳 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #2d7a5a;">
+            <div class="five-mirror-header">
+              <div class="five-mirror-icon" style="background: rgba(45,122,90,0.1); color: #2d7a5a;">媳</div>
+              <h3 style="font-size: 1.1rem; font-weight: 700; letter-spacing: 0.15em; color: #2d7a5a;">照 亲 · 弟媳</h3>
+            </div>
+            <p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.familyHarmony.reflectFamily.sisterInLaw }}</p>
+          </div>
+        </div>
+
+        <div class="space-y-5 mt-5">
+          <!-- 返观 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #8b0000;">
+            <div class="five-mirror-header">
+              <div class="five-mirror-icon" style="background: rgba(139,0,0,0.1); color: #8b0000;">返</div>
+              <h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #8b0000;">返 观</h3>
+            </div>
+            <div class="sutra-text space-y-3" style="padding-left:0.25rem;">
+              <p v-for="(para,pi) in chapter.familyHarmony.observeSelf.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p>
+            </div>
+          </div>
+
+          <!-- 转境 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #2d7a5a;">
+            <div class="five-mirror-header">
+              <div class="five-mirror-icon" style="background: rgba(45,122,90,0.1); color: #2d7a5a;">转</div>
+              <h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #2d7a5a;">转 境</h3>
+            </div>
+            <div class="sutra-text space-y-3" style="padding-left:0.25rem;">
+              <p v-for="(para,pi) in chapter.familyHarmony.transformView.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p>
+            </div>
+          </div>
+
+          <!-- 中道 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #6048a0;">
+            <div class="five-mirror-header">
+              <div class="five-mirror-icon" style="background: rgba(96,72,160,0.1); color: #6048a0;">中</div>
+              <h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #6048a0;">中 道</h3>
+            </div>
+            <p style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;padding-left:0.25rem;">{{ chapter.familyHarmony.middleWay }}</p>
+          </div>
+
+          <!-- 圆照 -->
+          <div class="five-mirror-card" style="border-left: 4px solid #8b6914;">
+            <div class="five-mirror-header">
+              <div class="five-mirror-icon" style="background: rgba(139,105,20,0.1); color: #8b6914;">圆</div>
+              <h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #8b6914;">圆 照</h3>
+            </div>
+            <div class="sutra-text space-y-3" style="padding-left:0.25rem;">
+              <p v-for="(para,pi) in chapter.familyHarmony.roundIllumination.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 四卡片grid：心法 / 日课 / 禁行 / 家灯 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #8b6914;">
+            <div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x2728;</span><h3 style="font-size:1rem;font-weight:700;color:#8b6914;letter-spacing:0.1em;">心 法</h3></div>
+            <p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-style:italic;">{{ chapter.familyHarmony.heartMantra }}</p>
+          </div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #2d6a4a;">
+            <div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x2600;</span><h3 style="font-size:1rem;font-weight:700;color:#2d6a4a;letter-spacing:0.1em;">日 课</h3></div>
+            <p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;">{{ chapter.familyHarmony.dailyAction }}</p>
+          </div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #8b0000;">
+            <div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x26D4;</span><h3 style="font-size:1rem;font-weight:700;color:#8b0000;letter-spacing:0.1em;">禁 行</h3></div>
+            <p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;font-weight:600;">{{ chapter.familyHarmony.forbidden }}</p>
+          </div>
+          <div class="card card-hover" style="padding:1.5rem;border-left:3px solid #c06030;grid-column: 1 / -1;">
+            <div class="flex items-center gap-2 mb-2"><span style="font-size:1.2rem;">&#x1F4AE;</span><h3 style="font-size:1rem;font-weight:700;color:#c06030;letter-spacing:0.1em;">家 灯</h3></div>
+            <p style="font-size:var(--text-body-sm);line-height:1.9;color:#4a3a20;">{{ chapter.familyHarmony.familyLight }}</p>
+          </div>
+        </div>
+
+        <!-- 见己 -->
+        <div class="five-mirror-card mt-5" style="border-left: 4px solid #5a3a1a;">
+          <div class="five-mirror-header">
+            <div class="five-mirror-icon" style="background: rgba(90,58,26,0.1); color: #5a3a1a;">见</div>
+            <h3 style="font-size: 1.175rem; font-weight: 700; letter-spacing: 0.15em; color: #5a3a1a;">见 己</h3>
+          </div>
+          <div class="sutra-text space-y-3" style="padding-left:0.25rem;">
+            <p v-for="(para,pi) in chapter.familyHarmony.seeSelf.split('\n').filter(Boolean)" :key="pi" style="font-size:var(--text-body-sm);line-height:2;color:#4a3a20;">{{ para }}</p>
+          </div>
+        </div>
+      </section>
+      <div v-if="chapter.familyHarmony" class="gold-line" />
 
       <!-- 10. 人伦修行 — 四种关系中的般若智慧 -->
       <section v-if="chapter.relationshipWisdom" id="relationships" class="section-paper">

@@ -193,6 +193,8 @@ export interface Hexagram {
   heartBarrier?: YijingHeartBarrier
   /** 她心即天心 — 帮她找回安全感、觉察自己、做自己 */
   herHeart?: YijingHerHeart
+  /** 家和易通 — 以本卦变通智慧观照全家，观象明时通变贞定 */
+  yijingFamilyHarmony?: YijingFamilyHarmony
 }
 
 // === 情关参究与她心即天心（易经专用） ===
@@ -245,4 +247,43 @@ export interface YijingHerHeart {
   thunderPool: string
   /** 兑言 — 她回来时的喜悦迎接 */
   returnLight: string
+}
+
+// === 家和易通（易经专用） ===
+
+/** 照爻 — 以爻位照见每一位家人 */
+export interface YijingFamilyReflection {
+  father: string
+  mother: string
+  elderBrother: string
+  youngerBrother: string
+  sisterInLaw: string
+}
+
+/** 家和易通 — 以本卦变通智慧观照全家，观象明时通变贞定 */
+export interface YijingFamilyHarmony {
+  /** 叩关 — 以本卦卦辞一句切入家庭真实情境 */
+  trigger: string
+  /** 观彖 — 以彖辞深度参究家庭困局与时位 */
+  contemplateTuan: string
+  /** 照爻 — 以六爻之位照见每一位家人 */
+  reflectLines: YijingFamilyReflection
+  /** 省身 — 觉察自己对家人的挂碍与执取 */
+  examineSelf: string
+  /** 通变 — 化而裁之，推而行之，转挂碍为清明 */
+  adaptChange: string
+  /** 中正 — 不偏不倚，当位守中 */
+  centralRight: string
+  /** 大象 — 以大象传整体观照全家图景 */
+  greatImage: string
+  /** 贞一 — 烦恼涌上来时能用的不易心法 */
+  holdPurity: string
+  /** 时行 — 时止则止时行则行，今日具体行动 */
+  timelyAction: string
+  /** 无咎 — 此刻绝不做的事，善补过也 */
+  noBlame: string
+  /** 明夷 — 明入地中其光不灭，给全家一句温柔的话 */
+  mingYi: string
+  /** 见龙 — 以本卦智慧照见自己不自知的品质与力量 */
+  seeDragon: string
 }
